@@ -2,12 +2,18 @@
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
   font-size: calc(10px + 2vmin);
   color: white;
   padding-top: 40px;
   padding-left: 200px;
+}
+
+.Welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 h1 {
@@ -15,8 +21,7 @@ h1 {
 }
 
 .QueryForm {
-  justify-content: flex-start;
-  width: 40%;
+  width: 100%;
 }
 
 .QueryInput {
@@ -35,10 +40,11 @@ h1 {
 }
 
 .vertical-form-button {
-  width: 10%;
+  width: 11%;
   background-color: #04AA6D;
   color: white;
-  padding: 14px 20px;
+  padding: 14px 18px;
+  font-size: 14pt;
   margin: 8px 0;
   border: none;
   border-radius: 4px;
