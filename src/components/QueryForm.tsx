@@ -1,8 +1,17 @@
 import React, {useState} from 'react';
+import {sendQuery} from '../services/ApiService';
 
 export function QueryForm() {
     const [inputQuery, setInputQuery] = useState('');
     const [query, setQuery] = useState('');
+
+    const handleQuery = ()  => {
+        sendQuery(inputQuery)
+            .then((res) => {
+                setQuery(res.response)
+            })
+            .catch((error) => console.error(error));
+    }
 
     return (
         <div className="QueryForm">
@@ -21,7 +30,7 @@ export function QueryForm() {
                     className="vertical-form-button"
                     onClick={e => {
                         e.preventDefault();
-                        setQuery(inputQuery)
+                        handleQuery()
                     }}>
                     Submit
                 </button>
