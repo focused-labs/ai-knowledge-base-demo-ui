@@ -3,14 +3,23 @@ import {sendQuery} from '../services/ApiService';
 
 export function QueryForm() {
     const [inputQuery, setInputQuery] = useState('');
-    const [query, setQuery] = useState('');
+    const [queryResponse, setQueryResponse] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleQuery = ()  => {
+        setLoading(true)
+        setQueryResponse("Waiting for response ...")
         sendQuery(inputQuery)
             .then((res) => {
-                setQuery(res.response)
+                // console.log("received response")
+                setLoading(false)
+                setQueryResponse(res.response.response)
             })
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                setLoading(false)
+                setQueryResponse("Received an error from the Knowledge Hub. Check the JS console.")
+                console.error(error)
+            });
     }
 
     return (
@@ -39,8 +48,15 @@ export function QueryForm() {
                 <label htmlFor="response">Here's what I found:</label>
                 <textarea className="query-response-text"
                           name="response"
-                          value={query}
+                          value={queryResponse}
                 />
+                {/*          name="response"*/}
+                {/*          value={queryResponse}
+                {/*{loading && <p>Loading</p>}*/}
+                {/*{!loading && <textarea className="query-response-text"*/}
+                {/*          name="response"*/}
+                {/*          value={queryResponse}*/}
+                {/*/>}*/}
             </form>
         </div>
     );
