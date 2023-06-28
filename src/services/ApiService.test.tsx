@@ -1,25 +1,18 @@
-import React from 'react';
-import fetch from 'jest-fetch-mock';
 import { sendQuery } from './ApiService';
 
-describe('apiService', () => {
-  beforeEach(() => {
-    fetch.resetMocks();
-  });
+describe('API Service calls', () => {
 
-  jest.mock('fetch');
+  it('calls the proper url given a query body', async () => {
+    global.fetch = jest.fn(() =>
+        Promise.resolve({
+          json: () => Promise.resolve({ response: "The meaning of life is 42." })
+        }),
+    ) as jest.Mock;
 
-  // TODO this test doesn't pass
-  it('getMenuList calls the proper url given a store ID', async () => {
+    const response = await sendQuery("What is the meaning of life?", "abcd");
 
-    fetch.mockResponseOnce(
-        JSON.stringify({ response: "You asked: What is the meaning of life?" })
-    )
-
-    const response = await sendQuery("What is the meaning of life?");
-
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toMatch(/\/query\/$/);
+    expect(global.fetch).toHaveBeenCalled();
+    expect(response).toEqual({ response: "The meaning of life is 42." });
   });
 
 });

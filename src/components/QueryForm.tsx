@@ -3,13 +3,22 @@ import {sendQuery} from '../services/ApiService';
 
 export function QueryForm() {
     const [inputQuery, setInputQuery] = useState('');
+    const [inputRole, setInputRole] = useState('none');
     const [queryResponse, setQueryResponse] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const roles = [
+        {label: "No Particular Preference", value: "none"},
+        {label: "Software Developer", value: "developer"},
+        {label: "UX / UI Designer", value: "designer"},
+        {label: "Executive", value: "executive"},
+        {label: "Potential Client", value: "client"}
+    ]
 
     const handleQuery = ()  => {
         setLoading(true)
         setQueryResponse("Waiting for response ...")
-        sendQuery(inputQuery)
+        sendQuery(inputQuery, inputRole)
             .then((res) => {
                 // console.log("received response")
                 setLoading(false)
@@ -25,6 +34,18 @@ export function QueryForm() {
     return (
         <div className="QueryForm">
             <form>
+                <label htmlFor="role">How would you describe yourself?</label>
+                <select
+                    className="vertical-form-select"
+                    value={inputRole}
+                    onChange={e => setInputRole(e.target.value)}
+                    name="role">
+                    {
+                        roles.map((role, i) => (
+                            <option key={i} value={role.value}>{role.label}</option>
+                        ))
+                    }
+                </select>
                 <label htmlFor="query">What do you want to know?</label>
                 <input
                     type="text"
@@ -50,13 +71,6 @@ export function QueryForm() {
                           name="response"
                           value={queryResponse}
                 />
-                {/*          name="response"*/}
-                {/*          value={queryResponse}
-                {/*{loading && <p>Loading</p>}*/}
-                {/*{!loading && <textarea className="query-response-text"*/}
-                {/*          name="response"*/}
-                {/*          value={queryResponse}*/}
-                {/*/>}*/}
             </form>
         </div>
     );
