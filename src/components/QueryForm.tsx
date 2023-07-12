@@ -8,11 +8,12 @@ export function QueryForm() {
     const [loading, setLoading] = useState(false);
 
     const roles = [
-        {label: "No Particular Preference", value: "none"},
-        {label: "Software Developer", value: "developer"},
-        {label: "UX / UI Designer", value: "designer"},
+        {label: "No Preference", value: "none"},
+        {label: "Developer", value: "developer"},
+        {label: "UX/UI Designer", value: "designer"},
+        {label: "Product Mgr", value: "pm"},
         {label: "Executive", value: "executive"},
-        {label: "Potential Client", value: "client"}
+        {label: "Client", value: "client"}
     ]
 
     const handleQuery = ()  => {
@@ -32,11 +33,10 @@ export function QueryForm() {
     }
 
     return (
-        <div className="QueryForm">
-            <form>
-                <label htmlFor="role">How would you describe yourself?</label>
+        <div className="flex flex-col justify-between">
+            <div className="h-20 py-3 flex flex-row border-t border-s border-e border-focused-labs-brand-light-purple rounded-t-md justify-between">
                 <select
-                    className="vertical-form-select"
+                    className="h-full basis-1/6 ml-2 border-0 rounded-md bg-focused-labs-background-lightest-blue text-focused-labs-brand-light-purple"
                     value={inputRole}
                     onChange={e => setInputRole(e.target.value)}
                     name="role">
@@ -46,32 +46,33 @@ export function QueryForm() {
                         ))
                     }
                 </select>
-                <label htmlFor="query">What do you want to know?</label>
                 <input
                     type="text"
-                    className="vertical-form-input"
+                    className="basis-4/6 ml-2 border-0 rounded-md "
+                    placeholder="Ask Something"
                     name="query"
                     value={inputQuery}
                     onChange={e => setInputQuery(e.target.value)}
                     required
                 />
-                <button
+                <input
                     type="submit"
-                    className="vertical-form-button"
+                    className="basis-1/6 border-1 rounded-full"
+                    value="Sub"
                     onClick={e => {
                         e.preventDefault();
                         handleQuery()
-                    }}>
-                    Submit
-                </button>
-            </form>
-            <form className="QueryResponse">
-                <label htmlFor="response">Here's what I found:</label>
-                <textarea className="query-response-text"
-                          name="response"
-                          value={queryResponse}
+                    }}
                 />
-            </form>
+            </div>
+            {/*<div className="min-h-full p-2 border-b border-s border-e border-focused-labs-brand-light-purple rounded-b-md">*/}
+            {/*    {queryResponse}*/}
+            {/*</div>*/}
+            <textarea className="min-h-full p-2 border-0 border-b border-s border-e border-focused-labs-brand-light-purple rounded-b-md"
+                      name="response"
+                      rows={10}
+                      value={queryResponse}
+            />
         </div>
     );
 }
