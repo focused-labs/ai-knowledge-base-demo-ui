@@ -13,7 +13,7 @@ function App() {
                     KB Hub
                 </div>
             </div>
-            <hr className="h-1 my-8 bg-gray-300" />
+            <hr className="h-1 my-8 bg-focused-labs-background-light-gray" />
             <div className={`${commonStyles.headerTextSetback}`}>
                 Ideas for you
             </div>
@@ -22,7 +22,7 @@ function App() {
                 <p className="py-2">What services does Focused Labs provide?</p>
                 <p className="py-2">Where is the Chicago office located?</p>
             </div>
-            <hr className="h-1 my-8 bg-gray-300" />
+            <hr className="h-1 my-8 bg-focused-labs-background-light-gray" />
             <QueryForm />
         </div>
     );

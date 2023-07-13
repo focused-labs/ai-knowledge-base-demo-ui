@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {sendQuery} from '../services/ApiService';
+import {ReactComponent as SparkleIcon} from '../images/sparkleIcon.svg';
+import {ReactComponent as EnterButton} from '../images/enterButton.svg';
 
 export function QueryForm() {
     const [inputQuery, setInputQuery] = useState('');
@@ -16,14 +18,13 @@ export function QueryForm() {
         {label: "Client", value: "client"}
     ]
 
-    const handleQuery = ()  => {
+    const handleQuery = () => {
         setLoading(true)
         setQueryResponse("Waiting for response ...")
         sendQuery(inputQuery, inputRole)
             .then((res) => {
-                // console.log("received response")
                 setLoading(false)
-                setQueryResponse(res.response.response)
+                setQueryResponse(res.response)
             })
             .catch((error) => {
                 setLoading(false)
@@ -34,18 +35,23 @@ export function QueryForm() {
 
     return (
         <div className="flex flex-col justify-between">
-            <div className="h-20 py-3 flex flex-row border-t border-s border-e border-focused-labs-brand-light-purple rounded-t-md justify-between">
-                <select
-                    className="h-full basis-1/6 ml-2 border-0 rounded-md bg-focused-labs-background-lightest-blue text-focused-labs-brand-light-purple"
-                    value={inputRole}
-                    onChange={e => setInputRole(e.target.value)}
-                    name="role">
-                    {
-                        roles.map((role, i) => (
-                            <option key={i} value={role.value}>{role.label}</option>
-                        ))
-                    }
-                </select>
+            <form className="h-20 py-3 flex flex-row border-2 border-focused-labs-background-light-gray rounded-md justify-between">
+                <div className="ml-2 border-0 rounded-md bg-focused-labs-background-lightest-blue flex flex-row">
+                    <SparkleIcon className="h-8 w-8 mt-3 ml-2 text-focused-labs-brand-purple "/>
+                    <select
+                        className="basis-1/6 outline-0 border-0 rounded-md bg-focused-labs-background-lightest-blue text-focused-labs-brand-light-purple"
+                        value={inputRole}
+                        onChange={e => setInputRole(e.target.value)}
+                        name="role">
+                        {
+                            roles.map((role, i) => (
+                                <option key={i} value={role.value}>
+                                    {role.label}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
                 <input
                     type="text"
                     className="basis-4/6 ml-2 border-0 rounded-md "
@@ -55,24 +61,22 @@ export function QueryForm() {
                     onChange={e => setInputQuery(e.target.value)}
                     required
                 />
-                <input
-                    type="submit"
-                    className="basis-1/6 border-1 rounded-full"
-                    value="Sub"
+                <button
+                    className="border-1 rounded-full"
                     onClick={e => {
                         e.preventDefault();
                         handleQuery()
                     }}
-                />
-            </div>
-            {/*<div className="min-h-full p-2 border-b border-s border-e border-focused-labs-brand-light-purple rounded-b-md">*/}
-            {/*    {queryResponse}*/}
-            {/*</div>*/}
-            <textarea className="min-h-full p-2 border-0 border-b border-s border-e border-focused-labs-brand-light-purple rounded-b-md"
-                      name="response"
-                      rows={10}
-                      value={queryResponse}
-            />
+                >
+                    <EnterButton className="mx-2"/>
+                </button>
+            </form>
+            {queryResponse ?
+                <div className="mt-2 p-2 border-2 border-focused-labs-background-light-gray rounded-md whitespace-pre-wrap">
+                    {queryResponse}
+                </div>
+                : ''
+            }
         </div>
-    );
+    )
 }
