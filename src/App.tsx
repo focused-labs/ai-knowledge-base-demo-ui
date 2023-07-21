@@ -1,8 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {QueryForm} from "./components/QueryForm";
 import {commonStyles} from "./styles/styles";
+import {IdeasForYou} from "./components/IdeasForYou";
+import {sendQuery} from "./services/ApiService";
 
 function App() {
+    const [persona, setPersona] = useState("none");
+    const [inputQuery, setInputQuery] = useState('');
+    const [queryResponse, setQueryResponse] = useState('');
+
+    const handleQueryWithText = (question: string) => {
+        setInputQuery(question)
+        handleQuery(question)
+    }
+    const handleQuery = (question: string) => {
+        setQueryResponse("Waiting for response ...")
+        sendQuery(question, persona)
+            .then((res) => {
+                setQueryResponse(res.response)
+            })
+            .catch((error) => {
+                setQueryResponse("Received an error from the Knowledge Hub. Check the JS console.")
+                console.error(error)
+            });
+    }
+
     return (
         <div className="pt-5 pl-4 max-w-2xl">
             <div className="flex flex-row justify-start mb-7">
@@ -14,16 +36,16 @@ function App() {
                 </div>
             </div>
             <hr className="h-1 my-8 bg-focused-labs-background-light-gray" />
-            <div className={`${commonStyles.headerTextSetback}`}>
-                Ideas for you
-            </div>
-            <div className={`${commonStyles.textFocused} flex flex-col`}>
-                <p className="py-2">What are the Focused Labs company values?</p>
-                <p className="py-2">What services does Focused Labs provide?</p>
-                <p className="py-2">Where is the Chicago office located?</p>
-            </div>
+            <IdeasForYou persona={persona}
+                         inputQuery={inputQuery}
+                         onSelectQuestion={(question: string) => handleQueryWithText(question)} />
             <hr className="h-1 my-8 bg-focused-labs-background-light-gray" />
-            <QueryForm />
+            <QueryForm persona={persona}
+                       inputQuery={inputQuery}
+                       onPersonaChange={(newPersona: string) => setPersona(newPersona)}
+                       onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
+                       queryResponse={queryResponse}
+                       onSubmit={() => handleQuery(inputQuery)}/>
         </div>
     );
 }
