@@ -1,5 +1,9 @@
 import React from 'react';
-import {commonStyles} from "../styles/styles";
+import {Grid, Link, Typography} from "@mui/material";
+
+type IdeaMap = {
+    [key: string]: string[];
+};
 
 export const IdeasForYou: React.FC<{
     persona: string,
@@ -7,7 +11,7 @@ export const IdeasForYou: React.FC<{
     onSelectQuestion: (value: string) => void,
 }> = ({persona, inputQuery, onSelectQuestion}) => {
 
-    const ideas = {
+    const ideas: IdeaMap = {
         "none": [
             "What companies has Focused Labs worked with?",
             "Tell me a brief history of Focused Labs",
@@ -26,21 +30,26 @@ export const IdeasForYou: React.FC<{
     }
 
     return (
-        <div className="pt-5 pl-4 max-w-2xl">
-            <div className={`${commonStyles.headerTextSetback}`}>
-                Ideas for you
-            </div>
-            <div className={`${commonStyles.textFocused} flex flex-col`}>
-                {
-                    // @ts-ignore
-                    ideas[persona].map((idea: string, i: number) => (
-                        <a key={i}
-                           className="py-2 cursor-pointer"
-                           onClick={e => onSelectQuestion(idea)}
-                        >{idea}</a>
-                    ))
+        <Grid container item bgcolor="#EDF3FF" display="flex" flexDirection="column"
+              justifyContent='between'
+        sx={{
+            p: 2,
+            border: "1px solid #ddd",
+            borderRadius: 4
+        }}>
+            <Grid>
+                <Typography fontWeight='bold'>Ideas for you</Typography>
+            </Grid>
+            <Grid display="flex" flexDirection="column">
+                {ideas[persona].map((idea: string, i: number) => (
+                    <Link key={i}
+                          sx={{cursor: 'pointer', color: '#8C92EF'}}
+                          onClick={e => onSelectQuestion(idea)}
+                    >{idea}</Link>
+                ))
                 }
-            </div>
-        </div>
+            </Grid>
+
+        </Grid>
     )
 }

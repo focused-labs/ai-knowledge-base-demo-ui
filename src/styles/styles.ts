@@ -17,3 +17,17 @@ export const commonStyles = {
     toastText: 'text-button-text',
     divider: 'border-b border-divider'
 };
+
+export const commonColors = {
+    backgroundColor: "#EEE",
+    focusedLabsBrandPurple: "#464482",
+    focusedLabsBrandLightPurple: "#8C92EF",
+    focusedLabsBrandLighterPurple: "#F2F3FF",
+    focusedLabsBrandOrange: "#FF714C",
+    "focused-labs-text-header-gray": "#2B2340",
+    "focused-labs-text-body-gray": "#090318",
+    focusedLabsTextSetbackGray: "#767676",
+    "focused-labs-background-dark-blue": "#110826",
+    focusedLabsBackgroundLightGray: "#E5E7EB",
+    "focused-labs-background-lightest-blue": "#EDF3FF",
+};
