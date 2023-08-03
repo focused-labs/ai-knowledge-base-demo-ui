@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import {IChat} from "../App";
 import {Grid, Typography} from "@mui/material";
 import {Chat} from "./Chat";
@@ -10,6 +10,13 @@ export const Conversation: React.FC<{
           conversation,
           loading
       }) => {
+
+    const LastMessage = () => {
+        const lastMessageRef: React.MutableRefObject<any> = useRef()
+        useEffect(() => lastMessageRef.current.scrollIntoView())
+        return <div ref={lastMessageRef} />
+    }
+
     return (
         <Grid item>
             {
@@ -17,6 +24,7 @@ export const Conversation: React.FC<{
                     <Chat key={i} chat={chat} loading={loading}/>
                 ))
             }
+            <LastMessage />
         </Grid>
     )
 };

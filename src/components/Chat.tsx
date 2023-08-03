@@ -29,7 +29,7 @@ export const Chat: React.FC<{
                         backgroundColor: "#5555ff",
                         color: "#eee",
                         border: "1px solid #ddd",
-                        borderRadius: 4
+                        borderRadius: "16px 0px 16px 16px"
                     }}>
                         {chat.question}
                     </Typography>
@@ -61,7 +61,7 @@ export const Chat: React.FC<{
                             pl: 2,
                             pr: 2,
                             border: "1px solid #ddd",
-                            borderRadius: 4
+                            borderRadius: "0px 16px 16px 16px"
                         }}>
                             {chat.answer}
                         </Typography>
