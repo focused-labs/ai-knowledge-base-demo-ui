@@ -117,7 +117,7 @@ function App() {
                         </Grid>
                     </Grid>
                     <Grid container direction={"row"} justifyContent={"center"}>
-                        <Typography sx={{fontFamily: "Inter", color: "#7A7A7A", fontSize: "12px", m: "2rem"}}>Please
+                        <Typography sx={{fontFamily: "Inter", color: "#7A7A7A", fontSize: "12px", m: "1rem"}}>Please
                             don’t enter any personal
                             information since questions and responses are being logged. The FL KB Hub may produce
                             inaccurate information about people, places, or facts. </Typography>
