@@ -1,22 +1,27 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ReactComponent as SparkleIcon} from '../images/sparkleIcon.svg';
 import {ReactComponent as EnterButton} from '../images/enterButton.svg';
-import {Grid} from "@mui/material";
-import LoadingGif from '../images/loading.gif';
+import {
+    Grid,
+    FormControl,
+    Select,
+    MenuItem,
+    Typography,
+    Button,
+    TextField,
+} from "@mui/material";
 
 export const QueryForm: React.FC<{
     persona: string,
     onPersonaChange: (value: string) => void,
     inputQuery: string,
     onInputQueryChange: (value: string) => void,
-    loading: boolean,
     onSubmit: () => void
 }> = ({
           persona,
           onPersonaChange,
           inputQuery,
           onInputQueryChange,
-          loading,
           onSubmit
       }) => {
 
@@ -32,37 +37,63 @@ export const QueryForm: React.FC<{
               direction="column"
               justifyContent="between">
             <Grid>
-                <form
-                    style={{
-                        width: "100%"
-                    }}
-                    className="h-20 py-3 flex flex-row border-2 border-focused-labs-background-light-gray rounded-md justify-start">
-                    <div className="ml-2 flex flex-row border-0 rounded-md bg-focused-labs-background-lightest-blue">
-                        <SparkleIcon className="h-8 w-8 mt-3 ml-2 text-focused-labs-brand-purple "/>
-                        <select
-                            className="outline-0 border-0 rounded-md bg-focused-labs-background-lightest-blue text-focused-labs-brand-light-purple"
-                            value={persona}
-                            onChange={e => onPersonaChange(e.target.value)}
-                            name="role">
-                            {
-                                roles.map((role, i) => (
-                                    <option key={i} value={role.value}>
-                                        {role.label}
-                                    </option>
-                                ))
+                <FormControl
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        padding: 1,
+                        border: '2px solid #E5E7EB',
+                        borderRadius: '0.375rem',
+                        height: "5rem"
+                    }}>
+                    <Select
+                        sx={{
+                            background: "#EDF3FF",
+                            color: "#8C92EF",
+                            outline: 0,
+                            width: "20rem",
+                            '& .MuiInputBase-input': {
+                                display: 'flex',
                             }
-                        </select>
-                    </div>
-                    <input
-                        type="text"
-                        className="ml-2 w-full border-0 rounded-md"
+                        }}
+                        value={persona}
+                        name="role"
+                        onChange={e => onPersonaChange(e.target.value)}>
+                        {
+                            roles.map((role, i) => (
+                                <MenuItem key={i} value={role.value}>
+                                    <SparkleIcon style={{
+                                        color: "#464482",
+                                        margin: 0,
+                                    }}/>
+                                    <Typography sx={{ml: 2}}>
+                                        {role.label}
+                                    </Typography>
+
+                                </MenuItem>
+                            ))
+                        }
+                    </Select>
+
+                    <TextField
+                        variant="outlined"
                         placeholder="Ask Something"
-                        name="query"
+                        fullWidth={true}
                         value={inputQuery}
                         onChange={e => onInputQueryChange(e.target.value)}
-                        required
+                        sx={{
+                            marginLeft: 2,
+                            height: 1,
+                            "& fieldset": {border: 'none'},
+                        }}
+                        onKeyDown={e => {
+                            if (e.key === 'Enter')
+                                onSubmit()
+                        }}
                     />
-                    <button
+                    <Button
+                        type="submit"
                         className="border-1 rounded-full"
                         onClick={e => {
                             e.preventDefault();
@@ -70,8 +101,8 @@ export const QueryForm: React.FC<{
                         }}
                     >
                         <EnterButton className="mx-2"/>
-                    </button>
-                </form>
+                    </Button>
+                </FormControl>
             </Grid>
         </Grid>
     )

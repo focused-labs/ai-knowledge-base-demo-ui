@@ -35,9 +35,9 @@ function App() {
             answer: ""
         }))
         setLoading(true)
+        setInputQuery('')
         sendQuery(question, persona)
             .then((res) => {
-                // const conv = conversation.splice(-1, 1)
                 setConversation(conversation.concat({
                     question: question,
                     answer: res.response
@@ -91,7 +91,6 @@ function App() {
                                        inputQuery={inputQuery}
                                        onPersonaChange={(newPersona: string) => setPersona(newPersona)}
                                        onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
-                                       loading={loading}
                                        onSubmit={() => handleQuery(inputQuery)}
                             />
                         </Grid>
