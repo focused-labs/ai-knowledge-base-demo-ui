@@ -55,6 +55,7 @@ function App() {
             });
     }
     const deleteSession = () => {
+        setConversation([])
         sendDeleteSession().then((res) => {
             localStorage.removeItem("session_id")
         }).catch((error) => console.error(error))
@@ -71,12 +72,21 @@ function App() {
                 justifyContent: 'between',
                 margin: 2,
                 padding: 2,
-                borderRadius: '0.7rem'
+                borderRadius: '0.7rem',
             }}>
-                <Grid container>
-                    <IdeasForYou persona={persona}
-                                 inputQuery={inputQuery}
-                                 onSelectQuestion={(question: string) => handleQueryWithText(question)}/>
+                <Grid container sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                }}>
+                    {conversation.length == 0 ?
+                        <IdeasForYou persona={persona}
+                                     inputQuery={inputQuery}
+                                     onSelectQuestion={(question: string) => handleQueryWithText(question)}
+                        />
+                        :
+                        ""
+                    }
                     <Grid item sx={{
                         maxHeight: '60vh',
                         overflow: "auto",
@@ -85,7 +95,7 @@ function App() {
                     }}>
                         <Conversation conversation={conversation} loading={loading}/>
                     </Grid>
-                    <Grid container direction="row" justifyContent="center">
+                    <Grid container item direction="row" justifyContent="center">
                         <Grid item xs={8}>
                             <QueryForm persona={persona}
                                        inputQuery={inputQuery}
