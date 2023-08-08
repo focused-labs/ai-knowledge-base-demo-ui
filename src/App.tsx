@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {QueryForm} from "./components/QueryForm";
 import {IdeasForYou} from "./components/IdeasForYou";
 import {sendDeleteSession, sendQuery} from "./services/ApiService";
-import {Button, Card, createTheme, CssBaseline, Grid, ThemeProvider} from "@mui/material";
+import {Button, Card, createTheme, CssBaseline, Grid, ThemeProvider, Typography} from "@mui/material";
 import {Header} from "./components/Header";
 import {Conversation} from "./components/Conversation";
 
@@ -116,10 +116,16 @@ function App() {
                             </Button>
                         </Grid>
                     </Grid>
+                    <Grid container direction={"row"} justifyContent={"center"}>
+                        <Typography sx={{fontFamily: "Inter", color: "#7A7A7A", fontSize: "12px", m: "2rem"}}>Please
+                            don’t enter any personal
+                            information since questions and responses are being logged. The FL KB Hub may produce
+                            inaccurate information about people, places, or facts. </Typography>
+                    </Grid>
                 </Grid>
             </Card>
         </ThemeProvider>
-);
+    );
 }
 
 export default App;
