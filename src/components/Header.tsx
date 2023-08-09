@@ -49,10 +49,10 @@ export const Header = () => (
                         Beta
                     </Typography>
                 </Grid>
-                <Grid container item md={5} xs={5} justifyContent="flex-end" alignItems="center" marginRight="2rem">
-                    <LightModeOutlinedIcon/>
-                    <Switch defaultChecked color="secondary" />
-                </Grid>
+                {/*<Grid container item md={5} xs={5} justifyContent="flex-end" alignItems="center" marginRight="2rem">*/}
+                {/*    <LightModeOutlinedIcon/>*/}
+                {/*    <Switch defaultChecked color="secondary" />*/}
+                {/*</Grid>*/}
                 <Grid item xs={0} md={1}/>
             </Grid>
         </AppBar>
