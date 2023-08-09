@@ -42,18 +42,24 @@ export const Chat: React.FC<{
                   }}>
                 {
                     loading && !chat.answer ?
-                        <Grid item>
-                            <Box component="img"
-                                 sx={{
-                                     backgroundColor: "#5555ff",
-                                 }}
-                                 alt="Waiting for response ..."
-                                 src={LoadingGif}
-                            />
-                            <Typography sx={{
-                            }}>
-                                {"Creating magical results ... this might take a minute!"}
-                            </Typography>
+                        <Grid container item justifyContent="center">
+                            <Grid container item xs={12} justifyContent="center">
+                                <Box component="img"
+                                     sx={{
+                                         backgroundColor: "#5555ff",
+                                         width: "4.375rem",
+                                     }}
+                                     alt="Waiting for response ..."
+                                     src={LoadingGif}
+                                />
+                            </Grid>
+                            <Grid container item xs={12} justifyContent="center">
+                                <Typography sx={{
+                                    color: '#4644B2',
+                                }}>
+                                    Creating magical results ... <br/>this might take a minute!
+                                </Typography>
+                            </Grid>
                         </Grid>
                         :
                         <Typography sx={{
