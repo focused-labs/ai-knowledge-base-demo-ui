@@ -1,5 +1,6 @@
 import React from 'react';
-import {Grid, Link, Typography} from "@mui/material";
+import {Button, Grid, Link, Typography} from "@mui/material";
+import {commonColors} from "../styles/styles";
 
 type IdeaMap = {
     [key: string]: string[];
@@ -30,22 +31,27 @@ export const IdeasForYou: React.FC<{
     }
 
     return (
-        <Grid container item bgcolor="#EDF3FF" display="flex" flexDirection="column"
+        <Grid container item display="flex" flexDirection="column"
               justifyContent='between'
-        sx={{
-            p: 2,
-            border: "1px solid #ddd",
-            borderRadius: 4
-        }}>
+              sx={{
+                  p: 2,
+                  borderRadius: 4,
+                  backgroundColor: commonColors.purple50
+              }}>
             <Grid>
-                <Typography fontWeight='bold'>Ideas for you</Typography>
+                <Typography fontWeight='700' paddingLeft="0.5rem" color={commonColors.black}>Ideas for you</Typography>
             </Grid>
-            <Grid display="flex" flexDirection="column">
+            <Grid display="flex" flexDirection="column" alignItems="flex-start">
                 {ideas[persona].map((idea: string, i: number) => (
-                    <Link key={i}
-                          sx={{cursor: 'pointer', color: '#8C92EF'}}
-                          onClick={e => onSelectQuestion(idea)}
-                    >{idea}</Link>
+                    <Button key={i}
+                            sx={{
+                                textAlign: 'left',
+                                textTransform: 'none',
+                                cursor: 'pointer',
+                                color: commonColors.purple600,
+                            }}
+                            onClick={e => onSelectQuestion(idea)}
+                    >{idea}</Button>
                 ))
                 }
             </Grid>

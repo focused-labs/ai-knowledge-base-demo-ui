@@ -2,17 +2,10 @@ import React, {useState} from 'react';
 import {QueryForm} from "./components/QueryForm";
 import {IdeasForYou} from "./components/IdeasForYou";
 import {sendDeleteSession, sendQuery} from "./services/ApiService";
-import {Button, Card, createTheme, CssBaseline, Grid, ThemeProvider, Typography} from "@mui/material";
+import {Button, Card, Grid, Typography} from "@mui/material";
 import {Header} from "./components/Header";
 import {Conversation} from "./components/Conversation";
-
-const theme = createTheme({
-    palette: {
-        primary: {main: '#CECEF2'},
-        secondary: {main: "#8C92EF"},
-        background: {default: "#EDF3FF"}
-    },
-})
+import {commonColors} from "./styles/styles";
 
 export interface IChat {
     question: string,
@@ -62,8 +55,7 @@ function App() {
     }
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
+        <>
             <Header/>
             <Card sx={{
                 maxHeight: '80vh',
@@ -79,7 +71,7 @@ function App() {
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
                 }}>
-                    {conversation.length == 0 ?
+                    {conversation.length === 0 ?
                         <IdeasForYou persona={persona}
                                      inputQuery={inputQuery}
                                      onSelectQuestion={(question: string) => handleQueryWithText(question)}
@@ -108,8 +100,10 @@ function App() {
                             marginLeft: "10px",
                             borderRadius: "8"
                         }}>
-                            <Button variant="outlined" color="secondary" sx={{
-                                borderRadius: 5
+                            <Button variant="outlined" sx={{
+                                color: commonColors.purple600,
+                                borderRadius: 5,
+                                borderColor: commonColors.purple600
                             }}
                                     className="bg-focused-labs-brand-lighter-purple text-blue-dark font-semibold hover:bg-focused-labs-brand-light-purple py-2 px-4 border border-blue hover:border-transparent rounded"
                                     onClick={() => deleteSession()}>Clear Chat
@@ -117,14 +111,14 @@ function App() {
                         </Grid>
                     </Grid>
                     <Grid container direction={"row"} justifyContent={"center"}>
-                        <Typography sx={{color: "#7A7A7A", fontSize: "0.75rem", m: "1rem"}}>Please
+                        <Typography sx={{color: commonColors.darkGray, fontSize: "0.75rem", m: "1rem"}}>Please
                             don’t enter any personal
                             information since questions and responses are being logged. The FL KB Hub may produce
                             inaccurate information about people, places, or facts. </Typography>
                     </Grid>
                 </Grid>
             </Card>
-        </ThemeProvider>
+        </>
     );
 }
 

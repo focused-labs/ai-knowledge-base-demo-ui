@@ -2,6 +2,7 @@ import React from "react";
 import {IChat} from "../App";
 import {Grid, Typography, Box} from "@mui/material";
 import LoadingGif from '../images/loading.gif';
+import {commonColors} from "../styles/styles";
 
 export const Chat: React.FC<{
     chat: IChat,
@@ -26,9 +27,8 @@ export const Chat: React.FC<{
                         p: 1,
                         pl: 2,
                         pr: 2,
-                        backgroundColor: "#5555ff",
-                        color: "#eee",
-                        border: "1px solid #ddd",
+                        backgroundColor: commonColors.purple600,
+                        color: commonColors.white,
                         borderRadius: "16px 0px 16px 16px"
                     }}>
                         {chat.question}
@@ -46,7 +46,7 @@ export const Chat: React.FC<{
                             <Grid container item xs={12} justifyContent="center">
                                 <Box component="img"
                                      sx={{
-                                         backgroundColor: "#5555ff",
+                                         backgroundColor: commonColors.white,
                                          width: "4.375rem",
                                      }}
                                      alt="Waiting for response ..."
@@ -55,7 +55,7 @@ export const Chat: React.FC<{
                             </Grid>
                             <Grid container item xs={12} justifyContent="center">
                                 <Typography sx={{
-                                    color: '#4644B2',
+                                    color: commonColors.purple600,
                                 }}>
                                     Creating magical results ... <br/>this might take a minute!
                                 </Typography>
@@ -66,7 +66,7 @@ export const Chat: React.FC<{
                             p: 1,
                             pl: 2,
                             pr: 2,
-                            border: "1px solid #ddd",
+                            border: `2px solid ${commonColors.lightGray}`,
                             borderRadius: "0px 16px 16px 16px"
                         }}>
                             {chat.answer}

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {AppBar, Grid, Link, Switch, Typography, useTheme} from "@mui/material";
-import {commonColors, commonStyles} from "../styles/styles";
+import {AppBar, Grid, Link, Switch, Typography} from "@mui/material";
+import {commonColors } from "../styles/styles";
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 
@@ -9,7 +9,7 @@ export const Header = () => (
         <AppBar
             position="static"
             sx={{
-                background: useTheme().palette.background.default,
+                background: commonColors.backgroundBlue,
                 height: '7vh',
                 minHeight: '70px',
                 paddingBottom: '.10rem',
@@ -22,25 +22,24 @@ export const Header = () => (
                 justifyContent="space-between"
                 alignItems="center"
                 sx={{paddingBottom: '.25rem'}}>
-                {/*<Grid item xs={0} md={1}/>*/}
                 <Grid container item md={6} marginLeft='2rem'>
                     <Typography sx={{
-                        color: commonColors.focusedLabsBrandPurple,
+                        color: commonColors.purple600,
                         fontSize: '2rem',
                         fontWeight: 'bold'
                     }}>
                         FL
                     </Typography>
                     <Typography sx={{
-                        color: commonColors.focusedLabsBrandOrange,
+                        color: commonColors.orange,
                         fontSize: '2rem',
                         fontWeight: 'bold'
                     }}>
                         &nbsp;KB Hub
                     </Typography>
                     <Typography sx={{
-                        color: commonColors.focusedLabsTextSetbackGray,
-                        background: commonColors.focusedLabsBackgroundLightGray,
+                        color: commonColors.darkGray,
+                        background: commonColors.lightGray,
                         fontSize: '1.8rem',
                         borderRadius: '10px',
                         padding: '0.1rem 0.5rem 0.1rem 0.5rem',
@@ -51,7 +50,7 @@ export const Header = () => (
                 </Grid>
                 {/*<Grid container item md={5} xs={5} justifyContent="flex-end" alignItems="center" marginRight="2rem">*/}
                 {/*    <LightModeOutlinedIcon/>*/}
-                {/*    <Switch defaultChecked color="secondary" />*/}
+                {/*    <Switch defaultChecked />*/}
                 {/*</Grid>*/}
                 <Grid item xs={0} md={1}/>
             </Grid>

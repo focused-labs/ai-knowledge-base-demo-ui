@@ -10,6 +10,7 @@ import {
     Button,
     TextField,
 } from "@mui/material";
+import {commonColors} from "../styles/styles";
 
 export const QueryForm: React.FC<{
     persona: string,
@@ -43,15 +44,14 @@ export const QueryForm: React.FC<{
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
                         padding: 1,
-                        border: '2px solid #E5E7EB',
+                        border: `2px solid ${commonColors.lightGray}`,
                         borderRadius: '0.375rem',
                         height: "5rem"
                     }}>
                     <Select
                         sx={{
-                            background: "#EDF3FF",
-                            color: "#8C92EF",
-                            outline: 0,
+                            background: commonColors.purple100,
+                            color: commonColors.purple400,
                             width: "20rem",
                             '& .MuiInputBase-input': {
                                 display: 'flex',
@@ -64,10 +64,10 @@ export const QueryForm: React.FC<{
                             roles.map((role, i) => (
                                 <MenuItem key={i} value={role.value}>
                                     <SparkleIcon style={{
-                                        color: "#464482",
+                                        color: commonColors.purple600,
                                         margin: 0,
                                     }}/>
-                                    <Typography sx={{ml: 2}}>
+                                    <Typography sx={{ml: 2, color: commonColors.purple600}}>
                                         {role.label}
                                     </Typography>
 
