@@ -1,7 +1,7 @@
 import React from "react";
 import {IChat} from "../App";
 import {Grid, Typography, Box} from "@mui/material";
-import LoadingGif from '../images/loading.gif';
+import LoadingGif from '../images/loading-non-fuzzy.gif';
 import {Sources} from "./Sources";
 import {commonColors} from "../styles/styles";
 
