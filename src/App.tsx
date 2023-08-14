@@ -12,7 +12,8 @@ export interface IChat {
     answer: string,
     sources: Source[]
 }
-export interface Source{
+
+export interface Source {
     URL?: string,
     title?: string;
 }
@@ -71,7 +72,8 @@ function App() {
                 flexDirection: 'column',
                 justifyContent: 'between',
                 margin: 2,
-                padding: 2,
+                paddingTop: 2,
+                paddingBottom: 2,
                 borderRadius: '0.7rem',
             }}>
                 <Grid container sx={{
@@ -95,7 +97,8 @@ function App() {
                     }}>
                         <Conversation conversation={conversation} loading={loading}/>
                     </Grid>
-                    <Grid container item direction="row" justifyContent="center">
+                    <Grid container item direction="row" justifyContent="center"
+                          sx={{boxShadow: "0px -3px 5px 0px #0000001F", padding: "1rem"}}>
                         <Grid item xs={8}>
                             <QueryForm persona={persona}
                                        inputQuery={inputQuery}
