@@ -46,6 +46,11 @@ export const QueryForm: React.FC<{
         {label: "Potential Client", value: "client"},
     ]
 
+    const onFormSubmit = () => {
+        onSubmit()
+        setEnterButtonStatus(EnterButtonState.DISABLED)
+    }
+
     const retrieveEnterButton = () => {
         switch (enterButtonStatus) {
             case EnterButtonState.DISABLED:
@@ -82,6 +87,38 @@ export const QueryForm: React.FC<{
                         width: "20rem",
                         '& .MuiInputBase-input': {
                             display: 'flex',
+                        },
+                        boxShadow: "none",
+                        ".MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline, & fieldset":
+                            {
+                                border: 0,
+                            },
+                        '& .MuiSvgIcon-root': {
+                            color: commonColors.purple600
+                        },
+                        '&:hover': {
+                            backgroundColor: commonColors.purple200,
+                        },
+                    }}
+                    MenuProps={{
+                        autoFocus: false,
+                        sx: {
+                            "&& .Mui-selected": {
+                                '&:hover': {
+                                    backgroundColor: commonColors.purple200,
+                                },
+                                backgroundColor: commonColors.purple100,
+                                "& .MuiTypography-root": {
+                                    fontWeight: 700,
+                                }
+                            },
+                            '& .MuiMenuItem-root:hover': {
+                                backgroundColor: commonColors.purple200,
+                            },
+                            '& .MuiList-root': {
+                                backgroundColor: commonColors.purple100,
+                            },
+                            "& fieldset": {border: 'none'},
                         }
                     }}
                     value={persona}
@@ -89,12 +126,16 @@ export const QueryForm: React.FC<{
                     onChange={e => onPersonaChange(e.target.value)}>
                     {
                         roles.map((role, i) => (
-                            <MenuItem key={i} value={role.value}>
+                            <MenuItem key={i} value={role.value} sx={{backgroundColor: commonColors.purple100}}>
                                 <SparkleIcon style={{
                                     color: commonColors.purple600,
                                     margin: 0,
                                 }}/>
-                                <Typography sx={{ml: 2, color: commonColors.purple600}}>
+                                <Typography sx={{
+                                    ml: 2,
+                                    color: commonColors.purple600,
+
+                                }}>
                                     {role.label}
                                 </Typography>
                             </MenuItem>
@@ -103,6 +144,7 @@ export const QueryForm: React.FC<{
                 </Select>
             </FormControl>
             <TextField
+                value={inputQuery}
                 placeholder="Ask Something"
                 sx={{
                     flex: 1,
@@ -120,7 +162,7 @@ export const QueryForm: React.FC<{
                 }}
                 onKeyDown={e => {
                     if (e.key === 'Enter')
-                        onSubmit()
+                        onFormSubmit()
                 }}
                 onBlur={() => setIsFocused(false)}
 
@@ -135,7 +177,7 @@ export const QueryForm: React.FC<{
                 }}
                 onClick={e => {
                     e.preventDefault();
-                    onSubmit()
+                    onFormSubmit()
                 }}
                 onMouseEnter={() => {
                     if (enterButtonStatus !== EnterButtonState.DISABLED) {
@@ -144,12 +186,16 @@ export const QueryForm: React.FC<{
                     }
                 }}
                 onMouseLeave={() => {
-                    setEnterButtonStatus(previousEnterButtonStatus)
+                    if (inputQuery) {
+                        setEnterButtonStatus(EnterButtonState.ACTIVE)
+                    } else {
+                        setEnterButtonStatus(EnterButtonState.DISABLED)
+                    }
                 }}
                 onMouseDown={() => {
                     setPreviousEnterButtonStatus(enterButtonStatus)
                     setEnterButtonStatus(EnterButtonState.PRESSED)
-                    onSubmit()
+                    onFormSubmit()
                 }}
                 onMouseUp={() => {
                     setEnterButtonStatus(previousEnterButtonStatus)
