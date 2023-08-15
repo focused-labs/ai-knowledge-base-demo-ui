@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {ReactComponent as SparkleIcon} from '../images/sparkleIcon.svg';
-import {ReactComponent as EnterButton} from '../images/enterButton.svg';
+import {ReactComponent as EnterButtonHover} from '../images/EnterHover.svg';
+import {ReactComponent as EnterButtonDefault} from '../images/EnterDefault.svg';
+import {ReactComponent as EnterButtonDisabled} from '../images/EnterDisabled.svg';
+import {ReactComponent as EnterButtonPressed} from '../images/EnterPressed.svg';
 import {
     FormControl,
     Select,
@@ -11,6 +14,13 @@ import {
     Box
 } from "@mui/material";
 import {commonColors} from "../styles/styles";
+
+enum EnterButtonState {
+    ACTIVE = "ACTIVE",
+    DISABLED = "DISABLED",
+    PRESSED = "PRESSED",
+    HOVERED = "HOVERED"
+}
 
 export const QueryForm: React.FC<{
     persona: string,
@@ -27,12 +37,28 @@ export const QueryForm: React.FC<{
       }) => {
 
     const [isFocused, setIsFocused] = useState(false);
+    const [enterButtonStatus, setEnterButtonStatus] = useState<EnterButtonState>(EnterButtonState.DISABLED)
+    const [previousEnterButtonStatus, setPreviousEnterButtonStatus] = useState<EnterButtonState>(EnterButtonState.DISABLED)
 
     const roles = [
         {label: "No Preference", value: "none"},
         {label: "Potential Employee", value: "candidate"},
         {label: "Potential Client", value: "client"},
     ]
+
+    const retrieveEnterButton = () => {
+        switch (enterButtonStatus) {
+            case EnterButtonState.DISABLED:
+                return <EnterButtonDisabled/>
+            case EnterButtonState.PRESSED:
+                return <EnterButtonPressed/>
+            case EnterButtonState.HOVERED:
+                return <EnterButtonHover/>
+            case EnterButtonState.ACTIVE:
+            default:
+                return <EnterButtonDefault/>
+        }
+    }
 
     return (
         <Box
@@ -42,7 +68,7 @@ export const QueryForm: React.FC<{
                 padding: 1,
                 border: `2px solid ${isFocused ? commonColors.purple600 : commonColors.lightGray}`,
                 borderRadius: 1,
-                transition: 'border 0.3s ease-in-out',
+                transition: 'border 0.2s ease-in-out',
                 '&:hover': {
                     border: `2px solid ${isFocused ? commonColors.purple600 : commonColors.purple400}`,
                 }
@@ -77,31 +103,59 @@ export const QueryForm: React.FC<{
                 </Select>
             </FormControl>
             <TextField
-                // variant="outlined"
                 placeholder="Ask Something"
                 sx={{
                     flex: 1,
                     marginRight: 1,
                     "& fieldset": {border: 'none'},
                 }}
-                onClick={() => {
-                    console.log("pressed")
-                    setIsFocused(true)
+                onClick={() => setIsFocused(true)}
+                onChange={(e) => {
+                    onInputQueryChange(e.target.value)
+                    if (e.target.value) {
+                        setEnterButtonStatus(EnterButtonState.ACTIVE);
+                    } else {
+                        setEnterButtonStatus(EnterButtonState.DISABLED);
+                    }
                 }}
-                onBlur={() => {
-                    console.log("unpressed")
-                    setIsFocused(false)
+                onKeyDown={e => {
+                    if (e.key === 'Enter')
+                        onSubmit()
                 }}
+                onBlur={() => setIsFocused(false)}
+
             />
             <Button
                 type="submit"
-                className="border-1 rounded-full"
+                disableRipple
+                sx={{
+                    '&:hover': {
+                        background: 'transparent',
+                    }
+                }}
                 onClick={e => {
                     e.preventDefault();
                     onSubmit()
                 }}
+                onMouseEnter={() => {
+                    if (enterButtonStatus !== EnterButtonState.DISABLED) {
+                        setPreviousEnterButtonStatus(enterButtonStatus)
+                        setEnterButtonStatus(EnterButtonState.HOVERED)
+                    }
+                }}
+                onMouseLeave={() => {
+                    setEnterButtonStatus(previousEnterButtonStatus)
+                }}
+                onMouseDown={() => {
+                    setPreviousEnterButtonStatus(enterButtonStatus)
+                    setEnterButtonStatus(EnterButtonState.PRESSED)
+                    onSubmit()
+                }}
+                onMouseUp={() => {
+                    setEnterButtonStatus(previousEnterButtonStatus)
+                }}
             >
-                <EnterButton className="mx-2"/>
+                {retrieveEnterButton()}
             </Button>
         </Box>
     );
