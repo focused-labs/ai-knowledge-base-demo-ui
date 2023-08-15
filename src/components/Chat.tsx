@@ -4,6 +4,7 @@ import {Grid, Typography, Box} from "@mui/material";
 import LoadingGif from '../images/loading-non-fuzzy.gif';
 import {Sources} from "./Sources";
 import {commonColors} from "../styles/styles";
+import {ErrorChatBubble} from "./ErrorChatBubble";
 
 export const Chat: React.FC<{
     chat: IChat,
@@ -64,19 +65,21 @@ export const Chat: React.FC<{
                         </Grid>
                         :
                         <>
-                            <Typography sx={{
-                                p: 1,
-                                pl: 2,
-                                pr: 2,
-                                border: `2px solid ${commonColors.lightGray}`,
-                                borderRadius: "0px 16px 16px 16px"
-                            }}>
-                                           {chat.answer}
-                            </Typography>
+                            {chat.isError ? <ErrorChatBubble></ErrorChatBubble> :
+                                <Typography sx={{
+                                    p: 1,
+                                    pl: 2,
+                                    pr: 2,
+                                    border: `2px solid ${commonColors.lightGray}`,
+                                    borderRadius: "0px 16px 16px 16px"
+                                }}>
+                                    {chat.answer}
+                                </Typography>
+                            }
                         </>
                 }
             </Grid>
-                <Sources chat={chat} loading={loading}></Sources>
+            <Sources chat={chat} loading={loading}></Sources>
         </Grid>
     )
 };

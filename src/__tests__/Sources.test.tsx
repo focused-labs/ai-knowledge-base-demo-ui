@@ -8,6 +8,7 @@ describe(("Sources.tsx"), () => {
         const chat = {
             question: "Who is a software engineer?",
             answer: "bob, fred, ginger",
+            isError: false,
             sources: [{
                 URL: "www.com",
                 title: "a page"
@@ -26,6 +27,7 @@ describe(("Sources.tsx"), () => {
         const chat = {
             question: "Who is a software engineer?",
             answer: "bob, fred, ginger",
+            isError: false,
             sources: [{
                 URL: "www.com",
                 title: "a page"

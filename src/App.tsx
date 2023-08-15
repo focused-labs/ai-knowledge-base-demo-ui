@@ -10,7 +10,8 @@ import {commonColors} from "./styles/styles";
 export interface IChat {
     question: string,
     answer: string,
-    sources: Source[]
+    sources: Source[],
+    isError: boolean
 }
 
 export interface Source {
@@ -32,7 +33,8 @@ function App() {
         setConversation(conversation.concat({
             question: question,
             answer: "",
-            sources: []
+            sources: [],
+            isError: false,
         }))
         setLoading(true)
         setInputQuery('')
@@ -41,7 +43,8 @@ function App() {
                 setConversation(conversation.concat({
                     question: question,
                     answer: res.response.result,
-                    sources: res.response.sources
+                    sources: res.response.sources,
+                    isError: false,
                 }))
                 localStorage.setItem("session_id", res.session_id)
                 setLoading(false)
@@ -50,7 +53,8 @@ function App() {
                 setConversation(conversation.concat({
                     question: question,
                     answer: "Received an error from the Knowledge Hub. Check the JS console.",
-                    sources: []
+                    sources: [],
+                    isError: true,
                 }))
                 setLoading(false)
                 console.error(error)
