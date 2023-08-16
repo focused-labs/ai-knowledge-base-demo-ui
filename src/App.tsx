@@ -130,15 +130,11 @@ function App() {
                                 </Grid>
                             </Grid>
                             <Grid container direction={"row"} justifyContent={"center"} item>
-                                <Typography sx={{color: commonColors.darkGray, fontSize: "0.75rem", m: "1rem"}}>Please
-                                    don’t enter any personal
-                                    information since questions and responses are being logged. The FL KB Hub may
-                                    produce
-                                    inaccurate information about people, places, or facts. </Typography>
-                            </Grid>
-                        </Grid>
-                    </Card>
+                                <Typography sx={{color: commonColors.darkGray, fontSize: "0.75rem", m: "1rem"}}>Questions and
+                                    responses are being logged. The Hub may produce inaccurate information.</Typography>
+                    </Grid>
                 </Grid>
+            </Card></Grid>
                 <Grid item xs={1}></Grid>
             </Grid>
         </>

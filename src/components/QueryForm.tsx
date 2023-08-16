@@ -41,9 +41,9 @@ export const QueryForm: React.FC<{
     const [previousEnterButtonStatus, setPreviousEnterButtonStatus] = useState<EnterButtonState>(EnterButtonState.DISABLED)
 
     const roles = [
-        {label: "No Preference", value: "none"},
+        {label: "Any Role", value: "none"},
         {label: "Potential Employee", value: "candidate"},
-        {label: "Potential Client", value: "client"},
+        {label: "Potential Customer", value: "customer"},
     ]
 
     const onFormSubmit = () => {

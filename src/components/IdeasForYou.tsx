@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Grid, Link, Typography} from "@mui/material";
+import {Button, Grid, Typography} from "@mui/material";
 import {commonColors} from "../styles/styles";
 
 type IdeaMap = {
@@ -23,7 +23,7 @@ export const IdeasForYou: React.FC<{
             "What does a typical day look like?",
             "What kinds of projects would I be working on?"
         ],
-        "client": [
+        "customer": [
             "What are Focused Labs rates?",
             "What does Focused Labs process look like?",
             "I have an idea but don't know where to start. How can Focused Labs help?"

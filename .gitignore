@@ -13,6 +13,7 @@
 
 # Intellij IDEA
 .idea/workspace.xml
+.idea/aws.xml
 
 # misc
 .DS_Store

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import {IChat} from "../App";
-import {Grid, Typography} from "@mui/material";
+import {Grid} from "@mui/material";
 import {Chat} from "./Chat";
 
 export const Conversation: React.FC<{

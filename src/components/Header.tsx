@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {AppBar, Grid, Typography} from "@mui/material";
-import {commonColors} from "../styles/styles";
+import {commonColors } from "../styles/styles";
 import {ReactComponent as SparkleIcon} from '../images/sparkle-icon2colors.svg';
 
 export const Header = () => (
