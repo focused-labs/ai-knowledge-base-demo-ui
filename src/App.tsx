@@ -71,10 +71,10 @@ function App() {
         <>
             <Header/>
             <Grid container justifyContent={"center"}>
-                <Grid item xs={1} sm={2}></Grid>
-                <Grid item xs={10} sm={8}>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={10}>
                     <Card sx={{
-                        height: "85vh",
+                        height: "80vh",
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
@@ -139,7 +139,7 @@ function App() {
                         </Grid>
                     </Card>
                 </Grid>
-                <Grid item xs={1} sm={2}></Grid>
+                <Grid item xs={1}></Grid>
             </Grid>
         </>
     );
