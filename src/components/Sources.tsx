@@ -4,6 +4,7 @@ import {IChat, Source} from "../App";
 import {Divider} from '@mui/material';
 import {SvgIcon} from '@mui/material';
 import * as _ from "lodash";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 
 export const Sources: React.FC<{
@@ -16,24 +17,34 @@ export const Sources: React.FC<{
     const filteredSources = (sources: Source[]) => {
         return _.uniqBy(sources, 'URL')
     }
+
+
+    const isScreenBiggerThan600 = useMediaQuery('(min-width:600px)');
+
+
+    const buttonLabelWidth = () => {
+        if (isScreenBiggerThan600) {
+            return "55%"
+        }
+        return `calc(100% - 30px)`
+    }
+
     return (<>
         {
             !loading && chat.answer && filteredSources(chat.sources).length > 0 &&
             <>
-                <Divider sx={{mt: "3rem"}}/>
+                <Divider sx={{mt: "1.5rem"}}/>
                 <Grid item container
                       direction="row"
                       sx={{
-                          mb: 3,
-                          mt: 3,
+                          mb: 1.5,
+                          mt: 1.5,
                       }}>
                     <Grid item xs={12}>
                         <Typography variant="body1" sx={{
                             color: "#7A7A7A",
                             fontFamily: "Inter",
-                            mt: "1rem",
                             pl: ".25rem",
-                            mb: "1rem"
                         }}>Sources</Typography>
                     </Grid>
                     {
@@ -44,16 +55,17 @@ export const Sources: React.FC<{
                                 key={i}
                                 href={source.URL}
                                 sx={{
+                                    height: "2.625rem",
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
                                     backgroundColor: "#8C92EF33",
                                     border: "1px solid #4644B2",
                                     borderRadius: "12px 12px 12px 12px",
-                                    p: "0.5rem",
+                                    p: ".5rem",
                                     m: ".25rem",
                                     color: "#4644B2",
-                                    fontSize: "1rem"
+                                    width: buttonLabelWidth
                                 }}
                             >
                                 <SvgIcon sx={{height: "1.5rem", mr: ".3rem", pb: ".2rem"}}>
@@ -71,7 +83,12 @@ export const Sources: React.FC<{
                                     </svg>
 
                                 </SvgIcon>
-                                <Typography> {`${source?.title || source?.URL}`}</Typography>
+                                <Typography sx={{
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    width: `calc(100% - 30px)`
+                                }}> {`${source?.title || source?.URL}`}</Typography>
                                 <SvgIcon sx={{margin: ".25rem"}}>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +101,7 @@ export const Sources: React.FC<{
                         ))
                     }
                 </Grid>
-                <Divider sx={{mt: ".5rem", mb: "4rem"}}/>
+                <Divider sx={{mt: ".5rem", mb: "1rem"}}/>
             </>
         }
     </>)

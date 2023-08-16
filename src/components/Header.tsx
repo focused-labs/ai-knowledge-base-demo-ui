@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {AppBar, Grid, Link, Switch, Typography} from "@mui/material";
-import {commonColors } from "../styles/styles";
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-
+import {AppBar, Grid, Typography} from "@mui/material";
+import {commonColors} from "../styles/styles";
+import {ReactComponent as SparkleIcon} from '../images/sparkle-icon2colors.svg';
 
 export const Header = () => (
     <div>
@@ -23,19 +22,20 @@ export const Header = () => (
                 alignItems="center"
                 sx={{paddingBottom: '.25rem'}}>
                 <Grid container item md={6} marginLeft='2rem'>
+                    <Grid item sx={{pr: ".35rem", pt: ".66rem"}}><SparkleIcon></SparkleIcon></Grid>
                     <Typography sx={{
                         color: commonColors.purple600,
                         fontSize: '2rem',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
                     }}>
-                        FL
+                        Knowledge
                     </Typography>
                     <Typography sx={{
                         color: commonColors.orange,
                         fontSize: '2rem',
                         fontWeight: 'bold'
                     }}>
-                        &nbsp;KB Hub
+                        &nbsp;Base
                     </Typography>
                     <Typography sx={{
                         color: commonColors.darkGray,

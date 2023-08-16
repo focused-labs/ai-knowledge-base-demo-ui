@@ -171,6 +171,7 @@ export const QueryForm: React.FC<{
                 type="submit"
                 disableRipple
                 sx={{
+                    height: "2.65rem", width: "9.188rem", fontSize: ".1rem",
                     '&:hover': {
                         background: 'transparent',
                     }

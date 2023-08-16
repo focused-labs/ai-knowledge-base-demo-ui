@@ -31,7 +31,10 @@ export const IdeasForYou: React.FC<{
     }
 
     return (
-        <Grid container item display="flex" flexDirection="column"
+        <Grid container
+              item
+              display="flex"
+              flexDirection="column"
               justifyContent='between'
               sx={{
                   p: 2,

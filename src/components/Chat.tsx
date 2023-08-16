@@ -5,6 +5,7 @@ import LoadingGif from '../images/loading-non-fuzzy.gif';
 import {Sources} from "./Sources";
 import {commonColors} from "../styles/styles";
 import {ErrorChatBubble} from "./ErrorChatBubble";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const Chat: React.FC<{
     chat: IChat,
@@ -13,6 +14,16 @@ export const Chat: React.FC<{
           chat,
           loading
       }) => {
+
+    const screenIsWide = useMediaQuery('(min-width:1100px)');
+
+    const maxWidth = () => {
+        if (screenIsWide) {
+            return "50%"
+        }
+        return `calc(100% - 30px)`
+    }
+
     return (
         <Grid container
               direction="column"
@@ -71,15 +82,17 @@ export const Chat: React.FC<{
                                     pl: 2,
                                     pr: 2,
                                     border: `2px solid ${commonColors.lightGray}`,
-                                    borderRadius: "0px 16px 16px 16px"
+                                    borderRadius: "0px 16px 16px 16px",
+                                    maxWidth: maxWidth
                                 }}>
                                     {chat.answer}
+                                    <Sources chat={chat} loading={loading}></Sources>
                                 </Typography>
                             }
                         </>
                 }
             </Grid>
-            <Sources chat={chat} loading={loading}></Sources>
+
         </Grid>
     )
 };
