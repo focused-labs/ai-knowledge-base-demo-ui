@@ -28,12 +28,14 @@ export const QueryForm: React.FC<{
     inputQuery: string,
     onInputQueryChange: (value: string) => void,
     onSubmit: () => void
+    loading: boolean
 }> = ({
           persona,
           onPersonaChange,
           inputQuery,
           onInputQueryChange,
-          onSubmit
+          onSubmit,
+          loading
       }) => {
 
     const [isFocused, setIsFocused] = useState(false);
@@ -47,8 +49,10 @@ export const QueryForm: React.FC<{
     ]
 
     const onFormSubmit = () => {
-        onSubmit()
-        setEnterButtonStatus(EnterButtonState.DISABLED)
+        if (inputQuery && !loading) {
+            onSubmit()
+            setEnterButtonStatus(EnterButtonState.DISABLED)
+        }
     }
 
     const retrieveEnterButton = () => {
@@ -168,6 +172,7 @@ export const QueryForm: React.FC<{
 
             />
             <Button
+                data-testid="submit-button"
                 type="submit"
                 disableRipple
                 sx={{

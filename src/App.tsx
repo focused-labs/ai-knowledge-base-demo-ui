@@ -112,6 +112,7 @@ function App() {
                                                onPersonaChange={(newPersona: string) => setPersona(newPersona)}
                                                onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
                                                onSubmit={() => handleQuery(inputQuery)}
+                                               loading={loading}
                                     />
                                 </Grid>
                                 <Grid item xs={1} sx={{
