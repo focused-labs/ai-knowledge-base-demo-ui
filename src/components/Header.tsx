@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {AppBar, Grid, Typography} from "@mui/material";
-import {commonColors } from "../styles/styles";
+import {AppBar, Grid, Typography} from '@mui/material';
+import {commonColors } from '../styles/styles';
 import {ReactComponent as SparkleIcon} from '../images/sparkle-icon2colors.svg';
 
 export const Header = () => (
     <div>
         <AppBar
-            position="static"
+            position='static'
             sx={{
                 background: commonColors.backgroundBlue,
                 height: '7vh',
@@ -17,12 +17,12 @@ export const Header = () => (
             }}>
             <Grid
                 container
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
+                direction='row'
+                justifyContent='space-between'
+                alignItems='center'
                 sx={{paddingBottom: '.25rem'}}>
                 <Grid container item md={6} marginLeft='2rem'>
-                    <Grid item sx={{pr: ".35rem", pt: ".66rem"}}><SparkleIcon></SparkleIcon></Grid>
+                    <Grid item sx={{pr: '.35rem', pt: '.66rem'}}><SparkleIcon></SparkleIcon></Grid>
                     <Typography sx={{
                         color: commonColors.purple600,
                         fontSize: '2rem',
@@ -48,7 +48,7 @@ export const Header = () => (
                         Beta
                     </Typography>
                 </Grid>
-                {/*<Grid container item md={5} xs={5} justifyContent="flex-end" alignItems="center" marginRight="2rem">*/}
+                {/*<Grid container item md={5} xs={5} justifyContent='flex-end' alignItems='center' marginRight='2rem'>*/}
                 {/*    <LightModeOutlinedIcon/>*/}
                 {/*    <Switch defaultChecked />*/}
                 {/*</Grid>*/}

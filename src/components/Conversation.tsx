@@ -1,7 +1,7 @@
-import React, {useEffect, useRef} from "react";
-import {IChat} from "../App";
-import {Grid} from "@mui/material";
-import {Chat} from "./Chat";
+import React, {useEffect, useRef} from 'react';
+import {IChat} from '../App';
+import {Grid} from '@mui/material';
+import {Chat} from './Chat';
 
 export const Conversation: React.FC<{
     conversation: Array<IChat>,

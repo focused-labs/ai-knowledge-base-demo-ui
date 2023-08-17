@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ReactComponent as SparkleIcon} from '../images/sparkleIcon.svg';
+import {ReactComponent as AIRole} from '../images/AIRole.svg';
 import {ReactComponent as EnterButtonHover} from '../images/EnterHover.svg';
 import {ReactComponent as EnterButtonDefault} from '../images/EnterDefault.svg';
 import {ReactComponent as EnterButtonDisabled} from '../images/EnterDisabled.svg';
@@ -11,15 +11,16 @@ import {
     Typography,
     Button,
     TextField,
-    Box
-} from "@mui/material";
-import {commonColors} from "../styles/styles";
+    Box,
+    ListSubheader
+} from '@mui/material';
+import {commonColors} from '../styles/styles';
 
 enum EnterButtonState {
-    ACTIVE = "ACTIVE",
-    DISABLED = "DISABLED",
-    PRESSED = "PRESSED",
-    HOVERED = "HOVERED"
+    ACTIVE = 'ACTIVE',
+    DISABLED = 'DISABLED',
+    PRESSED = 'PRESSED',
+    HOVERED = 'HOVERED'
 }
 
 export const QueryForm: React.FC<{
@@ -43,9 +44,9 @@ export const QueryForm: React.FC<{
     const [previousEnterButtonStatus, setPreviousEnterButtonStatus] = useState<EnterButtonState>(EnterButtonState.DISABLED)
 
     const roles = [
-        {label: "Any Role", value: "none"},
-        {label: "Potential Employee", value: "candidate"},
-        {label: "Potential Customer", value: "customer"},
+        {label: 'Any Role', value: 'none'},
+        {label: 'Potential Employee', value: 'candidate'},
+        {label: 'Potential Customer', value: 'customer'},
     ]
 
     const onFormSubmit = () => {
@@ -83,17 +84,17 @@ export const QueryForm: React.FC<{
                 }
             }}
         >
-            <FormControl variant="outlined" sx={{marginRight: 1}}>
+            <FormControl variant='outlined' sx={{marginRight: 1}}>
                 <Select
                     sx={{
                         background: commonColors.purple100,
                         color: commonColors.purple400,
-                        width: "20rem",
+                        width: '15rem',
                         '& .MuiInputBase-input': {
                             display: 'flex',
                         },
-                        boxShadow: "none",
-                        ".MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline, & fieldset":
+                        boxShadow: 'none',
+                        '.MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline, & fieldset':
                             {
                                 border: 0,
                             },
@@ -105,14 +106,23 @@ export const QueryForm: React.FC<{
                         },
                     }}
                     MenuProps={{
+                        anchorOrigin: {
+                            vertical: 'top',
+                            horizontal: 'center'
+                        },
+                        transformOrigin: {
+                            vertical: 'bottom',
+                            horizontal: 'center'
+                        },
                         autoFocus: false,
                         sx: {
-                            "&& .Mui-selected": {
+                            top: '-.75rem',
+                            '&& .Mui-selected': {
                                 '&:hover': {
                                     backgroundColor: commonColors.purple200,
                                 },
                                 backgroundColor: commonColors.purple100,
-                                "& .MuiTypography-root": {
+                                '& .MuiTypography-root': {
                                     fontWeight: 700,
                                 }
                             },
@@ -122,38 +132,46 @@ export const QueryForm: React.FC<{
                             '& .MuiList-root': {
                                 backgroundColor: commonColors.purple100,
                             },
-                            "& fieldset": {border: 'none'},
+                            '& fieldset': {border: 'none'},
                         }
                     }}
                     value={persona}
-                    name="role"
+                    name='role'
                     onChange={e => onPersonaChange(e.target.value)}>
-                    {
-                        roles.map((role, i) => (
-                            <MenuItem key={i} value={role.value} sx={{backgroundColor: commonColors.purple100}}>
-                                <SparkleIcon style={{
-                                    color: commonColors.purple600,
-                                    margin: 0,
-                                }}/>
-                                <Typography sx={{
-                                    ml: 2,
-                                    color: commonColors.purple600,
-
-                                }}>
-                                    {role.label}
-                                </Typography>
-                            </MenuItem>
-                        ))
-                    }
+                        <ListSubheader sx={{
+                            backgroundColor: commonColors.purple100,
+                            padding: '.5rem 1rem'
+                        }}>
+                            <Typography sx={{
+                                width: '12rem',
+                                fontWeight: 400,
+                                fontSize: '.75rem'
+                            }}>Tell us who you are for a better response:</Typography>
+                        </ListSubheader>
+                        {
+                            roles.map((role, i) => (
+                                <MenuItem key={i} value={role.value} sx={{backgroundColor: commonColors.purple100}}>
+                                    {(persona === role.value)&&<AIRole style={{
+                                        color: commonColors.purple600,
+                                        marginRight: '1rem',
+                                    }}/>}
+                                    <Typography sx={{
+                                        color: commonColors.purple600,
+                                    }}>
+                                        {role.label}
+                                    </Typography>
+                                </MenuItem>
+                            ))
+                        }
                 </Select>
             </FormControl>
             <TextField
                 value={inputQuery}
-                placeholder="Ask Something"
+                placeholder='Ask Something'
                 sx={{
                     flex: 1,
                     marginRight: 1,
-                    "& fieldset": {border: 'none'},
+                    '& fieldset': {border: 'none'},
                 }}
                 onClick={() => setIsFocused(true)}
                 onChange={(e) => {
@@ -173,10 +191,12 @@ export const QueryForm: React.FC<{
             />
             <Button
                 data-testid="submit-button"
-                type="submit"
+                type='submit'
                 disableRipple
                 sx={{
-                    height: "2.65rem", width: "9.188rem", fontSize: ".1rem",
+                    height: '2.65rem',
+                    minWidth: '2.5rem',
+                    justifyContent: 'flex-end',
                     '&:hover': {
                         background: 'transparent',
                     }
