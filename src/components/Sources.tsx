@@ -32,7 +32,7 @@ export const Sources: React.FC<{
 
     return (<>
         {
-            !loading && chat.answer && filteredSources(chat.sources).length > 0 &&
+            chat.answer && filteredSources(chat.sources).length > 0 &&
             <>
                 <Grid item container
                       direction='row'
