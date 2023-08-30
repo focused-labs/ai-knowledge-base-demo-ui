@@ -84,7 +84,7 @@ export const Chat: React.FC<{
                             <>
                                 {chat.isError ? <ErrorChatBubble></ErrorChatBubble> :
                                     <Grid container item>
-                                        {chat.answer}
+                                        <Typography whiteSpace="pre-line">{chat.answer}</Typography>
                                         <Sources chat={chat} loading={loading}></Sources>
                                     </Grid>
                                 }
