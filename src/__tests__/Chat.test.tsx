@@ -1,39 +1,34 @@
 import * as React from 'react';
-import {render} from '@testing-library/react';
-import {Chat} from '../components/Chat';
-import {IChat} from '../App';
+import { render } from '@testing-library/react';
+import { Chat } from '../components/Chat';
+import { IChat } from '../App';
 
-describe(('Chat.test.tsx'), () => {
+describe('Chat.test.tsx', () => {
+  it('only displays error message when theres an error', () => {
+    const chat: IChat = {
+      question: 'when does the sun rise?',
+      answer: 'hmm... idk',
+      sources: [],
+      isError: true
+    };
 
-    it('only displays error message when theres an error', () => {
+    const wrapper = render(<Chat chat={chat} loading={false}></Chat>);
 
-        const chat: IChat = {
-            question: 'when does the sun rise?',
-            answer: 'hmm... idk',
-            sources: [],
-            isError: true,
-        }
+    wrapper.getByText('Something went wrong. Please refresh the page and try again.');
+  });
 
-        const wrapper = render(<Chat chat={chat} loading={false}></Chat>)
+  it('does not display error message if no error', async () => {
+    const chat: IChat = {
+      question: 'when does the sun rise?',
+      answer: 'hmm... idk',
+      sources: [],
+      isError: false
+    };
 
-        wrapper.getByText('Something went wrong. Please refresh the page and try again.')
+    const wrapper = render(<Chat chat={chat} loading={false}></Chat>);
 
-    });
-
-    it('does not display error message if no error', async () => {
-
-        const chat: IChat = {
-            question: 'when does the sun rise?',
-            answer: 'hmm... idk',
-            sources: [],
-            isError: false,
-        }
-
-        const wrapper = render(<Chat chat={chat} loading={false}></Chat>)
-
-        expect(wrapper.queryByText('Something went wrong. Please refresh the page and try again.')).toBeNull()
-
-    });
-
-
+    expect(
+      wrapper.queryByText('Something went wrong. Please refresh the page and try again.')
+    ).toBeNull();
+  });
 });

@@ -44,3 +44,17 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Linting/Formatting
+#### ESLint
+- To enable eslint, go to IntelliJ's `Settings`
+- Search for `eslint`
+- Enable Automatic ESLint configuration
+- Click Apply and Ok
+
+#### Prettier
+- To enable prettier, go to IntelliJ's `Settings`
+- Search for `prettier`
+- Select the package that is in your project directory (ex: `<your path here>/<project name>/node_modules/prettier`)
+- Select the `Run on Reformat Code action`
+- Click Apply and Ok

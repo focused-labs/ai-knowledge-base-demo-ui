@@ -1,105 +1,109 @@
 import * as React from 'react';
-import {fireEvent, render, waitFor} from "@testing-library/react";
-import {QueryForm} from "../components/QueryForm";
-import {IPersona} from "../types/Personas";
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import { QueryForm } from '../components/QueryForm';
+import { IPersona } from '../types/Personas';
 
+describe('QueryForm.test.tsx', () => {
+  const mockSetInput = jest.fn();
+  const mockPersona: IPersona = {
+    label: 'Any Role',
+    value: 'human',
+    promptIdeas: [
+      'What companies has Focused Labs worked with?',
+      'Tell me a brief history of Focused Labs',
+      'What are Focused Labs core values?'
+    ]
+  };
+  const mockSetPersona = jest.fn();
+  const mockHandleQuery = jest.fn();
 
-describe(("QueryForm.test.tsx"), () => {
-    const mockSetInput = jest.fn()
-    const mockPersona: IPersona = {
-        label: "Any Role",
-        value: "human",
-        promptIdeas: [
-            'What companies has Focused Labs worked with?',
-            'Tell me a brief history of Focused Labs',
-            'What are Focused Labs core values?'
-        ]
-    }
-    const mockSetPersona = jest.fn()
-    const mockHandleQuery = jest.fn()
+  it('when there is text, clicking the enter button does submit a question', async () => {
+    const mockFilledInput = 'Hello?';
 
+    const queryForm = render(
+      <QueryForm
+        persona={mockPersona}
+        inputQuery={mockFilledInput}
+        onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
+        onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
+        onSubmit={() => mockHandleQuery(mockFilledInput)}
+        loading={false}
+      />
+    );
 
-    it('when there is text, clicking the enter button does submit a question', async () => {
-
-        const mockFilledInput = "Hello?"
-
-        const queryForm = render(<QueryForm persona={mockPersona}
-                                            inputQuery={mockFilledInput}
-                                            onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
-                                            onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
-                                            onSubmit={() => mockHandleQuery(mockFilledInput)}
-                                            loading={false}
-        />)
-
-        const submitButton = queryForm.getByTestId("submit-button")
-        await waitFor(() => {
-            fireEvent.click(submitButton)
-        })
-
-        expect(mockHandleQuery).toBeCalled()
-
+    const submitButton = queryForm.getByTestId('submit-button');
+    await waitFor(() => {
+      fireEvent.click(submitButton);
     });
 
-    it('when there is no text, clicking the enter button does not submit an empty question', async () => {
+    expect(mockHandleQuery).toBeCalled();
+  });
 
-        const mockEmptyInput = ""
+  it('when there is no text, clicking the enter button does not submit an empty question', async () => {
+    const mockEmptyInput = '';
 
-        const queryForm = render(<QueryForm persona={mockPersona}
-                                            inputQuery={mockEmptyInput}
-                                            onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
-                                            onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
-                                            onSubmit={() => mockHandleQuery(mockEmptyInput)}
-                                            loading={false}
-        />)
+    const queryForm = render(
+      <QueryForm
+        persona={mockPersona}
+        inputQuery={mockEmptyInput}
+        onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
+        onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
+        onSubmit={() => mockHandleQuery(mockEmptyInput)}
+        loading={false}
+      />
+    );
 
-        const submitButton = queryForm.getByTestId("submit-button")
-        await waitFor(() => {
-            fireEvent.click(submitButton)
-        })
-
-        expect(mockHandleQuery).not.toBeCalled()
+    const submitButton = queryForm.getByTestId('submit-button');
+    await waitFor(() => {
+      fireEvent.click(submitButton);
     });
 
-    it('when the response is loading, clicking the enter button does not submit', async () => {
+    expect(mockHandleQuery).not.toBeCalled();
+  });
 
-        const mockFilledInput = "Hello?"
-        const loading = true
+  it('when the response is loading, clicking the enter button does not submit', async () => {
+    const mockFilledInput = 'Hello?';
+    const loading = true;
 
-        const queryForm = render(<QueryForm persona={mockPersona}
-                                            inputQuery={mockFilledInput}
-                                            onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
-                                            onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
-                                            onSubmit={() => mockHandleQuery(mockFilledInput)}
-                                            loading={loading}
-        />)
+    const queryForm = render(
+      <QueryForm
+        persona={mockPersona}
+        inputQuery={mockFilledInput}
+        onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
+        onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
+        onSubmit={() => mockHandleQuery(mockFilledInput)}
+        loading={loading}
+      />
+    );
 
-        const submitButton = queryForm.getByTestId("submit-button")
-        await waitFor(() => {
-            fireEvent.click(submitButton)
-        })
-
-        expect(mockHandleQuery).not.toBeCalled()
+    const submitButton = queryForm.getByTestId('submit-button');
+    await waitFor(() => {
+      fireEvent.click(submitButton);
     });
 
-    it('when the response is done loading, clicking the enter button does submit', async () => {
+    expect(mockHandleQuery).not.toBeCalled();
+  });
 
-        const mockFilledInput = "Hello?"
-        const loading = false
+  it('when the response is done loading, clicking the enter button does submit', async () => {
+    const mockFilledInput = 'Hello?';
+    const loading = false;
 
-        const queryForm = render(<QueryForm persona={mockPersona}
-                                            inputQuery={mockFilledInput}
-                                            onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
-                                            onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
-                                            onSubmit={() => mockHandleQuery(mockFilledInput)}
-                                            loading={loading}
-        />)
+    const queryForm = render(
+      <QueryForm
+        persona={mockPersona}
+        inputQuery={mockFilledInput}
+        onPersonaChange={(newPersona: string) => mockSetPersona(newPersona)}
+        onInputQueryChange={(inputText: string) => mockSetInput(inputText)}
+        onSubmit={() => mockHandleQuery(mockFilledInput)}
+        loading={loading}
+      />
+    );
 
-        const submitButton = queryForm.getByTestId("submit-button")
-        await waitFor(() => {
-            fireEvent.click(submitButton)
-        })
-
-        expect(mockHandleQuery).toBeCalled()
+    const submitButton = queryForm.getByTestId('submit-button');
+    await waitFor(() => {
+      fireEvent.click(submitButton);
     });
 
+    expect(mockHandleQuery).toBeCalled();
+  });
 });
