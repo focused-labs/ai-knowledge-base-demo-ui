@@ -1,11 +1,20 @@
 import * as React from 'react';
 import {fireEvent, render, waitFor} from "@testing-library/react";
 import {QueryForm} from "../components/QueryForm";
+import {IPersona} from "../types/Personas";
 
 
 describe(("QueryForm.test.tsx"), () => {
     const mockSetInput = jest.fn()
-    const mockPersona = "none"
+    const mockPersona: IPersona = {
+        label: "Any Role",
+        value: "human",
+        promptIdeas: [
+            'What companies has Focused Labs worked with?',
+            'Tell me a brief history of Focused Labs',
+            'What are Focused Labs core values?'
+        ]
+    }
     const mockSetPersona = jest.fn()
     const mockHandleQuery = jest.fn()
 

@@ -7,6 +7,7 @@ import {Header} from './components/Header';
 import {Conversation} from './components/Conversation';
 import {ReactComponent as Trash} from './images/Trash.svg';
 import {commonColors} from './styles/styles';
+import {getPersona, IPersona, personas} from "./types/Personas";
 
 export interface IChat {
     question: string,
@@ -21,7 +22,7 @@ export interface Source {
 }
 
 function App() {
-    const [persona, setPersona] = useState('none');
+    const [persona, setPersona] = useState<IPersona>(personas.ANY_ROLE);
     const [inputQuery, setInputQuery] = useState('');
     const [loading, setLoading] = useState(false);
     const [conversation, setConversation] = useState<Array<IChat>>([]);
@@ -39,7 +40,7 @@ function App() {
         }))
         setLoading(true)
         setInputQuery('')
-        sendQuery(question, persona)
+        sendQuery(question, persona.value)
             .then((res) => {
                 setConversation(conversation.concat({
                     question: question,
@@ -63,7 +64,7 @@ function App() {
     }
     const deleteSession = () => {
         setConversation([])
-        sendDeleteSession().then((res) => {
+        sendDeleteSession().then(() => {
             localStorage.removeItem('session_id')
         }).catch((error) => console.error(error))
     }
@@ -93,7 +94,6 @@ function App() {
                             }}>
                                 {conversation.length === 0 ?
                                     <IdeasForYou persona={persona}
-                                                 inputQuery={inputQuery}
                                                  onSelectQuestion={(question: string) => handleQueryWithText(question)}
                                     />
                                     :
@@ -107,7 +107,7 @@ function App() {
                                 <Grid item xs={8}>
                                     <QueryForm persona={persona}
                                                inputQuery={inputQuery}
-                                               onPersonaChange={(newPersona: string) => setPersona(newPersona)}
+                                               onPersonaChange={(newPersonaValue: string) => setPersona(getPersona(newPersonaValue))}
                                                onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
                                                onSubmit={() => handleQuery(inputQuery)}
                                                loading={loading}
@@ -145,11 +145,12 @@ function App() {
                             </Grid>
                             <Grid container direction={'row'} justifyContent={'center'} item>
                                 <Typography sx={{color: commonColors.darkGray, fontSize: '0.75rem', m: '1rem'}}>
-                                    Questions and responses are being logged. The Hub may produce inaccurate information.
+                                    Questions and responses are being logged. The Hub may produce inaccurate
+                                    information.
                                 </Typography>
-                    </Grid>
-                </Grid>
-            </Card></Grid>
+                            </Grid>
+                        </Grid>
+                    </Card></Grid>
                 <Grid item xs={1}></Grid>
             </Grid>
         </>

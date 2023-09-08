@@ -1,4 +1,4 @@
-import { sendQuery } from './ApiService';
+import { sendQuery } from '../services/ApiService';
 
 describe('API Service calls', () => {
 

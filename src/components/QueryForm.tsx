@@ -15,6 +15,7 @@ import {
     ListSubheader
 } from '@mui/material';
 import {commonColors} from '../styles/styles';
+import {IPersona, personas} from "../types/Personas";
 
 enum EnterButtonState {
     ACTIVE = 'ACTIVE',
@@ -24,7 +25,7 @@ enum EnterButtonState {
 }
 
 export const QueryForm: React.FC<{
-    persona: string,
+    persona: IPersona,
     onPersonaChange: (value: string) => void,
     inputQuery: string,
     onInputQueryChange: (value: string) => void,
@@ -42,12 +43,6 @@ export const QueryForm: React.FC<{
     const [isFocused, setIsFocused] = useState(false);
     const [enterButtonStatus, setEnterButtonStatus] = useState<EnterButtonState>(EnterButtonState.DISABLED)
     const [previousEnterButtonStatus, setPreviousEnterButtonStatus] = useState<EnterButtonState>(EnterButtonState.DISABLED)
-
-    const roles = [
-        {label: 'Any Role', value: 'none'},
-        {label: 'Potential Employee', value: 'candidate'},
-        {label: 'Potential Customer', value: 'customer'},
-    ]
 
     const onFormSubmit = () => {
         if (inputQuery && !loading) {
@@ -135,34 +130,34 @@ export const QueryForm: React.FC<{
                             '& fieldset': {border: 'none'},
                         }
                     }}
-                    value={persona}
+                    value={persona.value}
                     name='role'
                     onChange={e => onPersonaChange(e.target.value)}>
-                        <ListSubheader sx={{
-                            backgroundColor: commonColors.purple100,
-                            padding: '.5rem 1rem'
-                        }}>
-                            <Typography sx={{
-                                width: '12rem',
-                                fontWeight: 400,
-                                fontSize: '.75rem'
-                            }}>Tell us who you are for a better response:</Typography>
-                        </ListSubheader>
-                        {
-                            roles.map((role, i) => (
-                                <MenuItem key={i} value={role.value} sx={{backgroundColor: commonColors.purple100}}>
-                                    {(persona === role.value)&&<AIRole style={{
-                                        color: commonColors.purple600,
-                                        marginRight: '1rem',
-                                    }}/>}
-                                    <Typography sx={{
-                                        color: commonColors.purple600,
-                                    }}>
-                                        {role.label}
-                                    </Typography>
-                                </MenuItem>
-                            ))
-                        }
+                    <ListSubheader sx={{
+                        backgroundColor: commonColors.purple100,
+                        padding: '.5rem 1rem'
+                    }}>
+                        <Typography sx={{
+                            width: '12rem',
+                            fontWeight: 400,
+                            fontSize: '.75rem'
+                        }}>Tell us who you are for a better response:</Typography>
+                    </ListSubheader>
+                    {
+                        Object.values(personas).map((role, i) => (
+                            <MenuItem key={i} value={role.value} sx={{backgroundColor: commonColors.purple100}}>
+                                {(persona.value === role.value) && <AIRole style={{
+                                    color: commonColors.purple600,
+                                    marginRight: '1rem',
+                                }}/>}
+                                <Typography sx={{
+                                    color: commonColors.purple600,
+                                }}>
+                                    {role.label}
+                                </Typography>
+                            </MenuItem>
+                        ))
+                    }
                 </Select>
             </FormControl>
             <TextField
