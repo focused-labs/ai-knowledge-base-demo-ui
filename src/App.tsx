@@ -103,33 +103,7 @@ const App = () => {
                   ''
                 )}
                 <Conversation conversation={conversation} loading={loading} />
-              </Grid>
-              <Grid
-                container
-                item
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem', height: '13vh' }}>
-                <Grid item xs={8}>
-                  <QueryForm
-                    persona={persona}
-                    inputQuery={inputQuery}
-                    onPersonaChange={(newPersonaValue: string) =>
-                      setPersona(getPersona(newPersonaValue))
-                    }
-                    onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
-                    onSubmit={() => handleQuery(inputQuery)}
-                    loading={loading}
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={1}
-                  sx={{
-                    marginLeft: '10px',
-                    borderRadius: '8'
-                  }}>
+                <Grid xs={12} container item direction="row" justifyContent="center" mt="1rem">
                   <Button
                     variant="outlined"
                     sx={{
@@ -161,6 +135,26 @@ const App = () => {
                       Clear Chat
                     </Typography>
                   </Button>
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                item
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem', height: '13vh' }}>
+                <Grid item xs={8}>
+                  <QueryForm
+                    persona={persona}
+                    inputQuery={inputQuery}
+                    onPersonaChange={(newPersonaValue: string) =>
+                      setPersona(getPersona(newPersonaValue))
+                    }
+                    onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
+                    onSubmit={() => handleQuery(inputQuery)}
+                    loading={loading}
+                  />
                 </Grid>
               </Grid>
               <Grid container direction="row" justifyContent="center" item>
