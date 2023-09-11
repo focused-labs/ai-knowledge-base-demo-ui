@@ -9,7 +9,8 @@ import { ErrorChatBubble } from './ErrorChatBubble';
 
 export const Chat: React.FC<{
   chat: IChat;
-}> = ({ chat }) => {
+  loading: boolean;
+}> = ({ chat, loading }) => {
   const screenIsWide = useMediaQuery('(min-width:1100px)');
 
   const maxWidth = () => {
@@ -17,6 +18,46 @@ export const Chat: React.FC<{
       return '50%';
     }
     return `calc(100% - 30px)`;
+  };
+
+  const renderLoadingOrErrorOrResponse = () => {
+    if (loading && !chat.answer) {
+      return (
+        <>
+          <Grid container item justifyContent="center">
+            <Box
+              component="img"
+              sx={{
+                backgroundColor: commonColors.white,
+                width: '4.375rem',
+                justifyContent: 'center',
+                mt: '2rem'
+              }}
+              alt="Waiting for response ..."
+              src={LoadingGif}
+            />
+          </Grid>
+          <Grid container item justifyContent="center">
+            <Typography
+              sx={{
+                mb: '1rem'
+              }}>
+              Creating magical results ... <br />
+              this might take a minute!
+            </Typography>
+          </Grid>
+        </>
+      );
+    }
+    if (chat.isError) {
+      return <ErrorChatBubble />;
+    }
+    return (
+      <Grid container item>
+        <Typography whiteSpace="pre-line">{chat.answer}</Typography>
+        <Sources chat={chat}></Sources>
+      </Grid>
+    );
   };
 
   return (
@@ -62,37 +103,7 @@ export const Chat: React.FC<{
             borderRadius: '0px 16px 16px 16px',
             maxWidth
           }}>
-          loading && !chat.answer ? (
-          <>
-            <Grid container item justifyContent="center">
-              <Box
-                component="img"
-                sx={{
-                  backgroundColor: commonColors.white,
-                  width: '4.375rem',
-                  justifyContent: 'center',
-                  mt: '2rem'
-                }}
-                alt="Waiting for response ..."
-                src={LoadingGif}
-              />
-            </Grid>
-            <Grid container item justifyContent="center">
-              <Typography
-                sx={{
-                  mb: '1rem'
-                }}>
-                Creating magical results ... <br />
-                this might take a minute!
-              </Typography>
-            </Grid>
-          </>
-          ) : chat.isError ? (<ErrorChatBubble></ErrorChatBubble>) : (
-          <Grid container item>
-            <Typography whiteSpace="pre-line">{chat.answer}</Typography>
-            <Sources chat={chat}></Sources>
-          </Grid>
-          )
+          {renderLoadingOrErrorOrResponse()}
         </Grid>
       </Grid>
     </Grid>

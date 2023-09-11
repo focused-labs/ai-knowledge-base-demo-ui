@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import { Chat } from '../components/Chat';
-import { IChat } from '../App';
+import { IChat } from '../types/IChat';
 
 describe('Chat.test.tsx', () => {
   it('only displays error message when theres an error', () => {

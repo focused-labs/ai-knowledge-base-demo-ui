@@ -102,7 +102,7 @@ const App = () => {
                 ) : (
                   ''
                 )}
-                <Conversation conversation={conversation} />
+                <Conversation conversation={conversation} loading={loading} />
               </Grid>
               <Grid
                 container

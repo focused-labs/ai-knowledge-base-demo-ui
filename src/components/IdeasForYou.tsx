@@ -25,9 +25,9 @@ export const IdeasForYou: React.FC<{
       </Typography>
     </Grid>
     <Grid display="flex" flexDirection="column" alignItems="flex-start">
-      {persona.promptIdeas.map((idea: string, i: number) => (
+      {persona.promptIdeas.map((idea: string) => (
         <Button
-          key={i}
+          key={persona.value}
           sx={{
             textAlign: 'left',
             textTransform: 'none',

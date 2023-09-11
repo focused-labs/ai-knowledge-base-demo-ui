@@ -142,8 +142,11 @@ export const QueryForm: React.FC<{
               Tell us who you are for a better response:
             </Typography>
           </ListSubheader>
-          {Object.values(personas).map((role, i: number) => (
-            <MenuItem key={i} value={role.value} sx={{ backgroundColor: commonColors.purple100 }}>
+          {Object.values(personas).map((role) => (
+            <MenuItem
+              key={role.value}
+              value={role.value}
+              sx={{ backgroundColor: commonColors.purple100 }}>
               {persona.value === role.value && (
                 <AIRole
                   style={{
