@@ -72,8 +72,8 @@ const App = () => {
     <>
       <Header />
       <Grid container justifyContent="center">
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
+        <Grid item xs={0} sm={1}></Grid>
+        <Grid item xs={12} sm={10}>
           <Card
             sx={{
               height: '80vh',
@@ -172,7 +172,7 @@ const App = () => {
             </Grid>
           </Card>
         </Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={0} sm={1}></Grid>
       </Grid>
     </>
   );
