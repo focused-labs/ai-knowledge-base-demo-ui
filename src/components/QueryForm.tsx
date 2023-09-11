@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-import {
-  FormControl,
-  Select,
-  MenuItem,
-  Typography,
-  Button,
-  TextField,
-  Box,
-  ListSubheader
-} from '@mui/material';
-import { ReactComponent as AIRole } from '../images/AIRole.svg';
+import { Box, Button, TextField } from '@mui/material';
+
 import { ReactComponent as EnterButtonHover } from '../images/EnterHover.svg';
 import { ReactComponent as EnterButtonDefault } from '../images/EnterDefault.svg';
 import { ReactComponent as EnterButtonDisabled } from '../images/EnterDisabled.svg';
 import { ReactComponent as EnterButtonPressed } from '../images/EnterPressed.svg';
 import { commonColors } from '../styles/styles';
-import { IPersona, personas } from '../types/Personas';
 
 enum EnterButtonState {
   ACTIVE = 'ACTIVE',
@@ -25,13 +15,11 @@ enum EnterButtonState {
 }
 
 export const QueryForm: React.FC<{
-  persona: IPersona;
-  onPersonaChange: (value: string) => void;
   inputQuery: string;
   onInputQueryChange: (value: string) => void;
   onSubmit: () => void;
   loading: boolean;
-}> = ({ persona, onPersonaChange, inputQuery, onInputQueryChange, onSubmit, loading }) => {
+}> = ({ inputQuery, onInputQueryChange, onSubmit, loading }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [enterButtonStatus, setEnterButtonStatus] = useState<EnterButtonState>(
     EnterButtonState.DISABLED
@@ -75,97 +63,6 @@ export const QueryForm: React.FC<{
           border: `2px solid ${isFocused ? commonColors.purple600 : commonColors.purple400}`
         }
       }}>
-      <FormControl variant="outlined" sx={{ marginRight: 1 }}>
-        <Select
-          sx={{
-            background: commonColors.purple100,
-            color: commonColors.purple400,
-            width: '15rem',
-            '& .MuiInputBase-input': {
-              display: 'flex'
-            },
-            boxShadow: 'none',
-            '.MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline, &.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline, & fieldset':
-              {
-                border: 0
-              },
-            '& .MuiSvgIcon-root': {
-              color: commonColors.purple600
-            },
-            '&:hover': {
-              backgroundColor: commonColors.purple200
-            }
-          }}
-          MenuProps={{
-            anchorOrigin: {
-              vertical: 'top',
-              horizontal: 'center'
-            },
-            transformOrigin: {
-              vertical: 'bottom',
-              horizontal: 'center'
-            },
-            autoFocus: false,
-            sx: {
-              top: '-.75rem',
-              '&& .Mui-selected': {
-                '&:hover': {
-                  backgroundColor: commonColors.purple200
-                },
-                backgroundColor: commonColors.purple100,
-                '& .MuiTypography-root': {
-                  fontWeight: 700
-                }
-              },
-              '& .MuiMenuItem-root:hover': {
-                backgroundColor: commonColors.purple200
-              },
-              '& .MuiList-root': {
-                backgroundColor: commonColors.purple100
-              },
-              '& fieldset': { border: 'none' }
-            }
-          }}
-          value={persona.value}
-          name="role"
-          onChange={(e) => onPersonaChange(e.target.value)}>
-          <ListSubheader
-            sx={{
-              backgroundColor: commonColors.purple100,
-              padding: '.5rem 1rem'
-            }}>
-            <Typography
-              sx={{
-                width: '12rem',
-                fontWeight: 400,
-                fontSize: '.75rem'
-              }}>
-              Tell us who you are for a better response:
-            </Typography>
-          </ListSubheader>
-          {Object.values(personas).map((role) => (
-            <MenuItem
-              key={role.value}
-              value={role.value}
-              sx={{ backgroundColor: commonColors.purple100 }}>
-              {persona.value === role.value && (
-                <AIRole
-                  style={{
-                    color: commonColors.purple600,
-                    marginRight: '1rem'
-                  }}
-                />
-              )}
-              <Typography
-                sx={{
-                  color: commonColors.purple600
-                }}>
-                {role.label}
-              </Typography>
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
       <TextField
         fullWidth
         value={inputQuery}

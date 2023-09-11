@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Grid, SvgIcon, Typography } from '@mui/material';
+import { Grid, SvgIcon, Typography } from '@mui/material';
 import { ReactComponent as SparkleIcon } from '../images/sparkleIcon.svg';
 import { commonColors } from '../styles/styles';
 import { IPersona } from '../types/Personas';
+import { StyledButton } from '../styles/StyledButton';
 
 export const IdeasForYou: React.FC<{
   persona: IPersona;
@@ -16,44 +17,32 @@ export const IdeasForYou: React.FC<{
     justifyContent="between"
     sx={{
       p: 2,
-      borderRadius: '1rem',
-      border: `1px solid ${commonColors.darkGray}`
+      backgroundColor: `${commonColors.purple50}`
     }}>
     <Grid>
-      <Typography fontWeight="700" paddingLeft="0.5rem" color={commonColors.black}>
+      <Grid container direction="row">
+        <Typography>
+          Great! You’ve selected<span style={{ fontWeight: 700 }}>&nbsp;{persona.label}</span>. You
+          can change your role by refreshing the page. I have access to a vast amount of data on
+          Focused Labs, including case studies, services, and even conversations with our CEO. You
+          can ask me a question in the prompt bar, or try one of our prompt ideas below.
+        </Typography>
+      </Grid>
+      <Typography fontWeight="700" marginTop="1.5rem">
         Some prompt ideas for you:
       </Typography>
     </Grid>
-    <Grid display="flex" flexDirection="column" alignItems="flex-start">
+    <Grid display="flex" flexDirection="column" alignItems="flex-start" marginTop="0.5rem">
       {persona.promptIdeas.map((idea: string) => (
-        <Button
-          key={persona.value}
-          sx={{
-            textAlign: 'left',
-            textTransform: 'none',
-            cursor: 'pointer',
-            color: commonColors.purple600,
-            backgroundColor: commonColors.purple100,
-            border: `1px solid ${commonColors.purple600}`,
-            borderRadius: '1.5rem',
-            p: '.5rem 1.375rem',
-            m: '.5rem',
-            '&:hover': {
-              backgroundColor: commonColors.purple200
-            },
-            '&:active': {
-              backgroundColor: commonColors.purple300
-            }
-          }}
-          onClick={() => onSelectQuestion(idea)}>
+        <StyledButton key={persona.value} onClick={() => onSelectQuestion(idea)}>
           <SvgIcon
             sx={{
-              mr: '.5rem'
+              mr: '0.5rem'
             }}>
             <SparkleIcon />
           </SvgIcon>
           <Typography>{idea}</Typography>
-        </Button>
+        </StyledButton>
       ))}
     </Grid>
   </Grid>

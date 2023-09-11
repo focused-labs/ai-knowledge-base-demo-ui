@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Button, Card, Grid, SvgIcon, Typography } from '@mui/material';
 import { QueryForm } from './components/QueryForm';
-import { IdeasForYou } from './components/IdeasForYou';
 import { sendDeleteSession, sendQuery } from './services/ApiService';
 import { Header } from './components/Header';
 import { Conversation } from './components/Conversation';
 import { ReactComponent as Trash } from './images/Trash.svg';
 import { commonColors } from './styles/styles';
-import { getPersona, IPersona, personas } from './types/Personas';
+import { IPersona, personas } from './types/Personas';
 import { IChat } from './types/IChat';
+import { RoleSelection } from './components/RoleSelection';
+import { IdeasForYou } from './components/IdeasForYou';
 
 const App = () => {
   const [persona, setPersona] = useState<IPersona>(personas.ANY_ROLE);
+  const [didSelectPersona, setDidSelectPersona] = useState(false);
   const [inputQuery, setInputQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [conversation, setConversation] = useState<Array<IChat>>([]);
@@ -61,11 +63,34 @@ const App = () => {
 
   const deleteSession = () => {
     setConversation([]);
+    setDidSelectPersona(false);
     sendDeleteSession()
       .then(() => {
         localStorage.removeItem('session_id');
       })
       .catch((error) => console.error(error));
+  };
+
+  const renderOnboardingMessage = () => {
+    if (conversation.length !== 0) {
+      return null;
+    }
+    if (didSelectPersona) {
+      return (
+        <IdeasForYou
+          persona={persona}
+          onSelectQuestion={(question: string) => handleQueryWithText(question)}
+        />
+      );
+    }
+    return (
+      <RoleSelection
+        onSelectPersona={(newPersona: IPersona) => {
+          setPersona(newPersona);
+          setDidSelectPersona(true);
+        }}
+      />
+    );
   };
 
   return (
@@ -94,48 +119,43 @@ const App = () => {
                   padding: 4,
                   width: 1
                 }}>
-                {conversation.length === 0 ? (
-                  <IdeasForYou
-                    persona={persona}
-                    onSelectQuestion={(question: string) => handleQueryWithText(question)}
-                  />
-                ) : (
-                  ''
-                )}
+                {renderOnboardingMessage()}
                 <Conversation conversation={conversation} loading={loading} />
-                <Grid xs={12} container item direction="row" justifyContent="center" mt="1rem">
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      color: commonColors.purple600,
-                      borderRadius: 5,
-                      borderColor: commonColors.purple600,
-                      textTransform: 'none',
-                      padding: '.5rem 1.375rem',
-                      fontSize: '1rem',
-                      '&:hover': {
-                        backgroundColor: commonColors.purple100
-                      },
-                      '&:active': {
-                        backgroundColor: commonColors.purple200
-                      }
-                    }}
-                    onClick={() => deleteSession()}>
-                    <SvgIcon
+                {conversation.length !== 0 && (
+                  <Grid xs={12} container item direction="row" justifyContent="center" mt="1rem">
+                    <Button
+                      variant="outlined"
                       sx={{
-                        ml: '-.2rem',
-                        mr: '.5rem'
-                      }}>
-                      <Trash />
-                    </SvgIcon>
-                    <Typography
-                      sx={{
-                        whiteSpace: 'nowrap'
-                      }}>
-                      Clear Chat
-                    </Typography>
-                  </Button>
-                </Grid>
+                        color: commonColors.purple600,
+                        borderRadius: 5,
+                        borderColor: commonColors.purple600,
+                        textTransform: 'none',
+                        padding: '.5rem 1.375rem',
+                        fontSize: '1rem',
+                        '&:hover': {
+                          backgroundColor: commonColors.purple100
+                        },
+                        '&:active': {
+                          backgroundColor: commonColors.purple200
+                        }
+                      }}
+                      onClick={() => deleteSession()}>
+                      <SvgIcon
+                        sx={{
+                          ml: '-.2rem',
+                          mr: '.5rem'
+                        }}>
+                        <Trash />
+                      </SvgIcon>
+                      <Typography
+                        sx={{
+                          whiteSpace: 'nowrap'
+                        }}>
+                        Clear Chat
+                      </Typography>
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
               <Grid
                 container
@@ -147,11 +167,7 @@ const App = () => {
                 sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem', height: '13vh' }}>
                 <Grid item xs={10}>
                   <QueryForm
-                    persona={persona}
                     inputQuery={inputQuery}
-                    onPersonaChange={(newPersonaValue: string) =>
-                      setPersona(getPersona(newPersonaValue))
-                    }
                     onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
                     onSubmit={() => handleQuery(inputQuery)}
                     loading={loading}
