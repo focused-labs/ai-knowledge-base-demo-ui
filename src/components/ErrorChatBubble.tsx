@@ -10,7 +10,6 @@ export const ErrorChatBubble: React.FC = () => (
       p: 1,
       pl: 2,
       pr: 2,
-      border: `1px solid ${commonColors.error}`,
       borderRadius: '0px 16px 16px 16px',
       display: 'flex',
       flexDirection: 'row',
@@ -21,7 +20,8 @@ export const ErrorChatBubble: React.FC = () => (
       <Typography
         sx={{
           color: commonColors.errorText,
-          paddingLeft: '.5rem'
+          paddingLeft: '.5rem',
+          fontWeight: 'bold'
         }}>
         Error
       </Typography>
