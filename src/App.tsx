@@ -89,7 +89,7 @@ const App = () => {
               <Grid
                 item
                 sx={{
-                  height: '65vh',
+                  height: '62vh',
                   overflow: 'auto',
                   padding: 4,
                   width: 1
@@ -143,8 +143,9 @@ const App = () => {
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
+                xs={12}
                 sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem', height: '13vh' }}>
-                <Grid item xs={8}>
+                <Grid item xs={10}>
                   <QueryForm
                     persona={persona}
                     inputQuery={inputQuery}
@@ -157,12 +158,12 @@ const App = () => {
                   />
                 </Grid>
               </Grid>
-              <Grid container direction="row" justifyContent="center" item>
-                <Typography sx={{ color: commonColors.darkGray, fontSize: '0.75rem', m: '1rem' }}>
-                  Questions and responses are being logged. The Hub may produce inaccurate
-                  information.
-                </Typography>
-              </Grid>
+            </Grid>
+            <Grid container direction="row" justifyContent="center" item xs={12} mt="2rem">
+              <Typography sx={{ color: commonColors.darkGray, fontSize: '0.75rem', m: '1rem' }}>
+                Questions and responses are being logged. The Hub may produce inaccurate
+                information.
+              </Typography>
             </Grid>
           </Card>
         </Grid>

@@ -66,6 +66,7 @@ export const QueryForm: React.FC<{
       sx={{
         display: 'flex',
         alignItems: 'center',
+        width: '100%',
         padding: 1,
         border: `2px solid ${isFocused ? commonColors.purple600 : commonColors.lightGray}`,
         borderRadius: 1,
@@ -166,8 +167,11 @@ export const QueryForm: React.FC<{
         </Select>
       </FormControl>
       <TextField
+        fullWidth
         value={inputQuery}
         placeholder="Ask Something"
+        multiline
+        maxRows={3}
         sx={{
           flex: 1,
           marginRight: 1,
