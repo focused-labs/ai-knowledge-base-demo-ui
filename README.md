@@ -46,6 +46,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Linting/Formatting
+* These instructions apply for IntelliJ. Consult other tutorials if you are using another IDE. 
 #### ESLint
 - To enable eslint, go to IntelliJ's `Settings`
 - Search for `eslint`
