@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Button, Card, Grid, SvgIcon, Typography } from '@mui/material';
+import { Card, Grid, Typography } from '@mui/material';
 import { QueryForm } from './components/QueryForm';
 import { sendDeleteSession, sendQuery } from './services/ApiService';
 import { Header } from './components/Header';
 import { Conversation } from './components/Conversation';
-import { ReactComponent as Trash } from './images/Trash.svg';
+
 import { commonColors } from './styles/styles';
 import { IPersona, personas } from './types/Personas';
 import { IChat } from './types/IChat';
 import { RoleSelection } from './components/RoleSelection';
 import { IdeasForYou } from './components/IdeasForYou';
+import { ClearChatButton } from './components/ClearChatButton';
 
 const App = () => {
   const [persona, setPersona] = useState<IPersona>(personas.ANY_ROLE);
@@ -101,99 +102,72 @@ const App = () => {
         <Grid item xs={12} sm={10}>
           <Card
             sx={{
-              height: '80vh',
+              height: {
+                xs: '87vh',
+                sm: '80vh'
+              },
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               borderRadius: '0.7rem'
             }}>
-            <Grid>
-              {conversation.length !== 0 && (
-                <Grid
-                  container
-                  item
-                  sx={{ backgroundColor: `${commonColors.purple100}` }}
-                  alignItems="center"
-                  justifyContent="center"
-                  padding="0.25rem">
-                  <Typography>Current Role: {persona.label}</Typography>{' '}
-                </Grid>
-              )}
-              <Grid
-                item
-                sx={{
-                  height: '56vh',
-                  overflow: 'auto',
-                  padding: '1rem',
-                  width: 1
-                }}>
-                {renderOnboardingMessage()}
-                <Conversation conversation={conversation} loading={loading} />
-                {conversation.length !== 0 && !loading && (
-                  <Grid xs={12} container item direction="row" justifyContent="center" mt="1rem">
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        color: commonColors.purple600,
-                        borderRadius: 5,
-                        borderColor: commonColors.purple600,
-                        textTransform: 'none',
-                        padding: '.5rem 1.375rem',
-                        fontSize: '1rem',
-                        '&:hover': {
-                          backgroundColor: commonColors.purple100
-                        },
-                        '&:active': {
-                          backgroundColor: commonColors.purple200
-                        }
-                      }}
-                      onClick={() => deleteSession()}>
-                      <SvgIcon
-                        sx={{
-                          ml: '-.2rem',
-                          mr: '.5rem'
-                        }}>
-                        <Trash />
-                      </SvgIcon>
-                      <Typography
-                        sx={{
-                          whiteSpace: 'nowrap'
-                        }}>
-                        Clear Chat
-                      </Typography>
-                    </Button>
-                  </Grid>
-                )}
-              </Grid>
+            {conversation.length !== 0 && (
               <Grid
                 container
                 item
+                sx={{ backgroundColor: `${commonColors.purple100}` }}
+                alignItems="center"
+                justifyContent="center"
+                padding="0.25rem">
+                <Typography>Current Role: {persona.label}</Typography>{' '}
+              </Grid>
+            )}
+            <Grid
+              item
+              sx={{
+                minHeight: '62vh',
+                overflow: 'auto',
+                padding: '1rem',
+                width: 1
+              }}>
+              {renderOnboardingMessage()}
+              <Conversation conversation={conversation} loading={loading} />
+              {conversation.length !== 0 && !loading && (
+                <Grid xs={12} container item direction="row" justifyContent="center" mt="1rem">
+                  <ClearChatButton deleteSession={deleteSession} />
+                </Grid>
+              )}
+            </Grid>
+
+            <Grid
+              container
+              item
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              xs={12}
+              sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem', height: '13vh' }}>
+              <Grid item xs={10}>
+                <QueryForm
+                  inputQuery={inputQuery}
+                  onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
+                  onSubmit={() => handleQuery(inputQuery)}
+                  loading={loading}
+                />
+              </Grid>
+              <Grid
+                container
                 direction="row"
                 justifyContent="center"
                 alignItems="center"
-                xs={12}
-                sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem', height: '13vh' }}>
-                <Grid item xs={10}>
-                  <QueryForm
-                    inputQuery={inputQuery}
-                    onInputQueryChange={(inputText: string) => setInputQuery(inputText)}
-                    onSubmit={() => handleQuery(inputQuery)}
-                    loading={loading}
-                  />
-                </Grid>
+                item
+                xs={12}>
+                <Typography
+                  sx={{ color: commonColors.darkGray, fontSize: '0.75rem', textAlign: 'center' }}>
+                  This chatbot may produce inaccurate information. Questions and responses are being
+                  logged.
+                </Typography>
               </Grid>
-            </Grid>
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              item
-              xs={12}
-              sx={{ mt: '3rem' }}>
-              <Typography sx={{ color: commonColors.darkGray, fontSize: '0.75rem' }}>
-                Questions and responses are being logged. The Hub may produce inaccurate
-                information.
-              </Typography>
             </Grid>
           </Card>
         </Grid>

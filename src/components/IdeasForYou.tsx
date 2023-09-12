@@ -34,7 +34,7 @@ export const IdeasForYou: React.FC<{
     </Grid>
     <Grid display="flex" flexDirection="column" alignItems="flex-start" marginTop="0.5rem">
       {persona.promptIdeas.map((idea: string) => (
-        <StyledButton key={persona.value} onClick={() => onSelectQuestion(idea)}>
+        <StyledButton key={idea} onClick={() => onSelectQuestion(idea)}>
           <SvgIcon
             sx={{
               mr: '0.5rem'

@@ -15,9 +15,9 @@ export const Chat: React.FC<{
 
   const maxWidth = () => {
     if (screenIsWide) {
-      return '50%';
+      return '75%';
     }
-    return `calc(100% - 30px)`;
+    return `100%`;
   };
 
   const renderLoadingOrErrorOrResponse = () => {
@@ -69,7 +69,7 @@ export const Chat: React.FC<{
         direction="row"
         justifyContent="flex-end"
         sx={{
-          mb: 1
+          mb: 2
         }}>
         <Grid item>
           <Typography
@@ -91,7 +91,7 @@ export const Chat: React.FC<{
         container
         direction="row"
         sx={{
-          mb: 1
+          mb: 2
         }}>
         <Grid
           container
@@ -102,7 +102,7 @@ export const Chat: React.FC<{
             p: 2,
             borderRadius: '0px 16px 16px 16px',
             backgroundColor: chat.isError ? '#FDEDED' : commonColors.purple50,
-            maxWidth
+            minWidth: maxWidth()
           }}>
           {renderLoadingOrErrorOrResponse()}
         </Grid>

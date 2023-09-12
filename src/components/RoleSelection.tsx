@@ -9,7 +9,6 @@ export const RoleSelection: React.FC<{
   onSelectPersona: (persona: IPersona) => void;
 }> = ({ onSelectPersona }) => (
   <Grid
-    data-testId="role-selection"
     container
     item
     display="flex"
