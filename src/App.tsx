@@ -183,7 +183,13 @@ const App = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid container direction="row" justifyContent="center" item xs={12}>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              item
+              xs={12}
+              sx={{ mt: '3rem' }}>
               <Typography sx={{ color: commonColors.darkGray, fontSize: '0.75rem' }}>
                 Questions and responses are being logged. The Hub may produce inaccurate
                 information.

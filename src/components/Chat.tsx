@@ -100,7 +100,6 @@ export const Chat: React.FC<{
           xs={6}
           sx={{
             p: 2,
-            border: `1px solid ${chat.isError ? commonColors.error : commonColors.lightGray}`,
             borderRadius: '0px 16px 16px 16px',
             backgroundColor: chat.isError ? '#FDEDED' : commonColors.purple50,
             maxWidth
