@@ -12,6 +12,6 @@ export const commonColors = {
   lightGray: '#E4E4E4',
   white: '#FFFFFF',
   black: '#000000',
-  error: '#D32F2F',
+  error: '#FDEDED',
   errorText: '#5F2120'
 };

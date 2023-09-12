@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Link, Typography, Divider, SvgIcon } from '@mui/material';
+import { Grid, Link, Typography, SvgIcon } from '@mui/material';
 import * as _ from 'lodash';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -31,15 +31,9 @@ export const Sources: React.FC<{
       container
       direction="row"
       sx={{
-        mb: '.5rem',
-        mt: '1rem'
+        mb: '.5rem'
       }}>
       <Grid item xs={12}>
-        <Divider
-          sx={{
-            m: '.625rem 0'
-          }}
-        />
         <Typography
           variant="body1"
           sx={{
@@ -133,9 +127,6 @@ export const Sources: React.FC<{
           </SvgIcon>
         </Link>
       ))}
-      <Grid item xs={12}>
-        <Divider sx={{ mt: '.625rem' }} />
-      </Grid>
     </Grid>
   );
 };

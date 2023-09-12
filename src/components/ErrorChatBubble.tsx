@@ -13,7 +13,8 @@ export const ErrorChatBubble: React.FC = () => (
       borderRadius: '0px 16px 16px 16px',
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
+      backgroundColor: commonColors.error
     }}>
     <Grid item container xs={12}>
       <ErrorIcon></ErrorIcon>

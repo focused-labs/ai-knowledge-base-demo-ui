@@ -105,7 +105,6 @@ const App = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              paddingBottom: 2,
               borderRadius: '0.7rem'
             }}>
             <Grid>
@@ -130,7 +129,7 @@ const App = () => {
                 }}>
                 {renderOnboardingMessage()}
                 <Conversation conversation={conversation} loading={loading} />
-                {conversation.length !== 0 && (
+                {conversation.length !== 0 && !loading && (
                   <Grid xs={12} container item direction="row" justifyContent="center" mt="1rem">
                     <Button
                       variant="outlined"
@@ -184,8 +183,8 @@ const App = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid container direction="row" justifyContent="center" item xs={12} mt="2rem">
-              <Typography sx={{ color: commonColors.darkGray, fontSize: '0.75rem', m: '1rem' }}>
+            <Grid container direction="row" justifyContent="center" item xs={12}>
+              <Typography sx={{ color: commonColors.darkGray, fontSize: '0.75rem' }}>
                 Questions and responses are being logged. The Hub may produce inaccurate
                 information.
               </Typography>
