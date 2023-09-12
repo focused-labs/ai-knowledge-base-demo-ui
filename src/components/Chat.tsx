@@ -28,7 +28,7 @@ export const Chat: React.FC<{
             <Box
               component="img"
               sx={{
-                backgroundColor: commonColors.white,
+                backgroundColor: commonColors.purple50,
                 width: '4.375rem',
                 justifyContent: 'center',
                 mt: '2rem'
@@ -40,7 +40,8 @@ export const Chat: React.FC<{
           <Grid container item justifyContent="center">
             <Typography
               sx={{
-                mb: '1rem'
+                mb: '1rem',
+                color: commonColors.purple600
               }}>
               Creating magical results ... <br />
               this might take a minute!
@@ -101,7 +102,7 @@ export const Chat: React.FC<{
             p: 2,
             border: `1px solid ${chat.isError ? commonColors.error : commonColors.lightGray}`,
             borderRadius: '0px 16px 16px 16px',
-            backgroundColor: chat.isError ? '#FDEDED' : commonColors.white,
+            backgroundColor: chat.isError ? '#FDEDED' : commonColors.purple50,
             maxWidth
           }}>
           {renderLoadingOrErrorOrResponse()}

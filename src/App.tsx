@@ -105,18 +105,27 @@ const App = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              margin: 2,
-              paddingTop: 3,
               paddingBottom: 2,
               borderRadius: '0.7rem'
             }}>
             <Grid>
+              {conversation.length !== 0 && (
+                <Grid
+                  container
+                  item
+                  sx={{ backgroundColor: `${commonColors.purple100}` }}
+                  alignItems="center"
+                  justifyContent="center"
+                  padding="0.25rem">
+                  <Typography>Current Role: {persona.label}</Typography>{' '}
+                </Grid>
+              )}
               <Grid
                 item
                 sx={{
-                  height: '62vh',
+                  height: '56vh',
                   overflow: 'auto',
-                  padding: 4,
+                  padding: '1rem',
                   width: 1
                 }}>
                 {renderOnboardingMessage()}
