@@ -174,6 +174,7 @@ const App = () => {
                     fontSize: '0.75rem',
                     textAlign: 'center'
                   }}
+                  target="_blank"
                   href="https://github.com/focused-labs/knowledge-base-demo">
                   View this project on GitHub
                 </Link>
