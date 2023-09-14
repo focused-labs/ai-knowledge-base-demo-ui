@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap');
+
+@layer base {
+    ul {
+        list-style-type: disc;
+        list-style-position: outside;
+        margin-left: 25px;
+    }
+
+    ol {
+        list-style-type: decimal;
+        list-style-position: outside;
+        margin-left: 25px;
+    }
+}
+
+body, html {
+    font-family: 'Inter', sans-serif;
+    background-color: #EDF3FF;
+}
