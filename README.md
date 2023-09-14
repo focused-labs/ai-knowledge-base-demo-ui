@@ -1,3 +1,5 @@
+# knowledge-base-demo-ui
+A demo project showcasing the UI (front end) for our domain specific AI powered knowledge base 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
