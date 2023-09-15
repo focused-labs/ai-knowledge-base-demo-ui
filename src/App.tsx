@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Card, Grid, Typography, Link } from '@mui/material';
+import { Card, CardMedia, Fab, Grid, Link, Modal, Typography } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { QueryForm } from './components/QueryForm';
 import { sendDeleteSession, sendQuery } from './services/ApiService';
 import { Header } from './components/Header';
 import { Conversation } from './components/Conversation';
-
+import infoVideo from './images/info-video.gif';
 import { commonColors } from './styles/styles';
 import { IPersona, personas } from './types/Personas';
 import { IChat } from './types/IChat';
@@ -18,6 +20,10 @@ const App = () => {
   const [inputQuery, setInputQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [conversation, setConversation] = useState<Array<IChat>>([]);
+  const [infoOpen, setInfoOpen] = useState(true);
+  const handleInfoClose = () => setInfoOpen(false);
+
+  const isScreenBiggerThan600 = useMediaQuery('(min-width:600px)');
 
   const handleQuery = (question: string) => {
     setConversation(
@@ -96,6 +102,40 @@ const App = () => {
 
   return (
     <>
+      <Modal
+        open={infoOpen}
+        disableAutoFocus
+        onClose={handleInfoClose}
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          border: 'none',
+          boxShadow: 'none',
+          height: isScreenBiggerThan600 ? '70%' : '45%',
+          mt: '5%'
+        }}>
+        <Card sx={{ position: 'relative', backgroundColor: 'rgba(0, 0, 0, .1)' }}>
+          <Fab
+            onClick={handleInfoClose}
+            size="small"
+            sx={{
+              color: commonColors.black,
+              position: 'absolute',
+              top: 4,
+              right: 3
+            }}>
+            <CloseIcon />
+          </Fab>
+          <CardMedia
+            component="img"
+            image={infoVideo}
+            height="100%"
+            alt="loading..."
+            sx={{ objectFit: 'contain', border: 'none' }}
+          />
+        </Card>
+      </Modal>
       <Header />
       <Grid container justifyContent="center">
         <Grid item xs={0} sm={1}></Grid>
