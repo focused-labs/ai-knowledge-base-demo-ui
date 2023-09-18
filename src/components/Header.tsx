@@ -1,8 +1,8 @@
-import { AppBar, Box, Toolbar } from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
 import * as React from 'react';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import { ReactComponent as FocusedLabsLogo } from '../images/fl-logo.svg';
-import { ReactComponent as Octocatlogo } from '../images/octocat.svg';
-import { ReactComponent as Linkedinlogo } from '../images/linkedin-logo.svg';
 import { commonColors } from '../styles/styles';
 
 export const Header = () => (
@@ -18,21 +18,26 @@ export const Header = () => (
         display="flex"
         flexGrow={1}
         onClick={() => window.open('https://focusedlabs.io/', '_blank')}>
-        <FocusedLabsLogo></FocusedLabsLogo>
+        <IconButton style={{ backgroundColor: 'transparent' }}>
+          <FocusedLabsLogo></FocusedLabsLogo>
+        </IconButton>
       </Box>
-      <Box
-        sx={{ paddingRight: '1rem' }}
+      <IconButton
+        style={{ backgroundColor: 'transparent' }}
+        sx={{ paddingRight: '1rem', color: 'black' }}
         onClick={() =>
           window.open('https://www.linkedin.com/company/build-focused-labs/', '_blank')
         }>
-        <Linkedinlogo></Linkedinlogo>
-      </Box>
-      <Box
+        <LinkedInIcon></LinkedInIcon>
+      </IconButton>
+      <IconButton
+        style={{ backgroundColor: 'transparent' }}
+        sx={{ color: 'black' }}
         onClick={() =>
           window.open('https://github.com/focused-labs/knowledge-base-demo', '_blank')
         }>
-        <Octocatlogo></Octocatlogo>
-      </Box>
+        <GitHubIcon></GitHubIcon>
+      </IconButton>
     </Toolbar>
   </AppBar>
 );
