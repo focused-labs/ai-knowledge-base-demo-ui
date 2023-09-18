@@ -6,6 +6,7 @@ import LoadingGif from '../images/loading-non-fuzzy.gif';
 import { Sources } from './Sources';
 import { commonColors } from '../styles/styles';
 import { ErrorChatBubble } from './ErrorChatBubble';
+import { TypewriterText } from './TypewriterText';
 
 export const Chat: React.FC<{
   chat: IChat;
@@ -55,7 +56,7 @@ export const Chat: React.FC<{
     }
     return (
       <Grid container item>
-        <Typography whiteSpace="pre-line">{chat.answer}</Typography>
+        <TypewriterText text={chat.answer}></TypewriterText>
         <Sources chat={chat}></Sources>
       </Grid>
     );
