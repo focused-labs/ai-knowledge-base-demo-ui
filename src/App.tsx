@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardMedia, Fab, Grid, Link, Modal, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { QueryForm } from './components/QueryForm';
 import { sendDeleteSession, sendQuery } from './services/ApiService';
 import { Header } from './components/Header';
@@ -22,8 +21,6 @@ const App = () => {
   const [conversation, setConversation] = useState<Array<IChat>>([]);
   const [infoOpen, setInfoOpen] = useState(true);
   const handleInfoClose = () => setInfoOpen(false);
-
-  const isScreenBiggerThan600 = useMediaQuery('(min-width:600px)');
 
   const handleQuery = (question: string) => {
     setConversation(
@@ -112,7 +109,7 @@ const App = () => {
           justifyContent: 'center',
           border: 'none',
           boxShadow: 'none',
-          height: isScreenBiggerThan600 ? '70%' : '45%',
+          height: '70%',
           mt: '5%'
         }}>
         <Card sx={{ position: 'relative', backgroundColor: 'rgba(0, 0, 0, .1)' }}>
