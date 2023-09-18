@@ -3,7 +3,7 @@ import { Card, CardMedia, Fab, Grid, Link, Modal, Typography } from '@mui/materi
 import CloseIcon from '@mui/icons-material/Close';
 import { QueryForm } from './components/QueryForm';
 import { sendDeleteSession, sendQuery } from './services/ApiService';
-import { Header } from './components/Header';
+import { SubHeader } from './components/SubHeader';
 import { Conversation } from './components/Conversation';
 import infoVideo from './images/info-video.gif';
 import { commonColors } from './styles/styles';
@@ -12,6 +12,7 @@ import { IChat } from './types/IChat';
 import { RoleSelection } from './components/RoleSelection';
 import { IdeasForYou } from './components/IdeasForYou';
 import { ClearChatButton } from './components/ClearChatButton';
+import { Header } from './components/Header';
 
 const App = () => {
   const [persona, setPersona] = useState<IPersona>(personas.ANY_ROLE);
@@ -134,7 +135,16 @@ const App = () => {
         </Card>
       </Modal>
       <Header />
-      <Grid container justifyContent="center">
+      <Grid
+        container
+        justifyContent="center"
+        sx={{
+          borderTopLeftRadius: '2rem',
+          borderTopRightRadius: '2rem',
+          backgroundColor: commonColors.backgroundBlue,
+          height: '100vh'
+        }}>
+        <SubHeader />
         <Grid item xs={0} sm={1}></Grid>
         <Grid item xs={12} sm={10}>
           <Card
