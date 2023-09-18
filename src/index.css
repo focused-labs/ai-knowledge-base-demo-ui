@@ -16,5 +16,7 @@
 
 body, html {
     font-family: 'Inter', sans-serif;
-    background-color: #EDF3FF;
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
 }

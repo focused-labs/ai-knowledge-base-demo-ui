@@ -1,65 +1,43 @@
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
 import * as React from 'react';
-import { AppBar, Grid, Typography } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import { ReactComponent as FocusedLabsLogo } from '../images/fl-logo.svg';
 import { commonColors } from '../styles/styles';
-import { ReactComponent as SparkleIcon } from '../images/sparkle-icon2colors.svg';
 
-export const Header = () => {
-  const screenIsMobile = useMediaQuery('(max-width:1100px)');
-
-  return (
-    <div>
-      <AppBar
-        position="static"
-        sx={{
-          background: commonColors.backgroundBlue,
-          height: '7vh',
-          minHeight: '70px',
-          paddingBottom: '.10rem',
-          paddingTop: '1rem',
-          boxShadow: 'none'
-        }}>
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ paddingBottom: '.25rem' }}>
-          <Grid container item md={6} marginLeft="2rem">
-            <Grid item sx={{ pr: '.35rem', pt: screenIsMobile ? '0rem' : '.66rem' }}>
-              <SparkleIcon style={{ fontSize: screenIsMobile ? '1rem' : '2rem' }}></SparkleIcon>
-            </Grid>
-            <Typography
-              sx={{
-                color: commonColors.purple600,
-                fontSize: screenIsMobile ? '1.15rem' : '2rem',
-                fontWeight: 'bold'
-              }}>
-              Knowledge
-            </Typography>
-            <Typography
-              sx={{
-                color: commonColors.orange,
-                fontSize: screenIsMobile ? '1.15rem' : '2rem',
-                fontWeight: 'bold'
-              }}>
-              &nbsp;Base
-            </Typography>
-            <Typography
-              sx={{
-                color: commonColors.darkGray,
-                background: commonColors.lightGray,
-                fontSize: screenIsMobile ? '1.15rem' : '2rem',
-                borderRadius: '10px',
-                padding: '0rem 0.25rem 0rem 0.25rem',
-                marginLeft: '0.5rem'
-              }}>
-              Beta
-            </Typography>
-          </Grid>
-          <Grid item xs={0} md={1} />
-        </Grid>
-      </AppBar>
-    </div>
-  );
-};
+export const Header = () => (
+  <AppBar
+    position="static"
+    sx={{
+      background: commonColors.white,
+      height: '7vh',
+      boxShadow: 'none'
+    }}>
+    <Toolbar>
+      <Box
+        display="flex"
+        flexGrow={1}
+        onClick={() => window.open('https://focusedlabs.io/', '_blank')}>
+        <IconButton style={{ backgroundColor: 'transparent' }}>
+          <FocusedLabsLogo></FocusedLabsLogo>
+        </IconButton>
+      </Box>
+      <IconButton
+        style={{ backgroundColor: 'transparent' }}
+        sx={{ paddingRight: '1rem', color: 'black' }}
+        onClick={() =>
+          window.open('https://www.linkedin.com/company/build-focused-labs/', '_blank')
+        }>
+        <LinkedInIcon></LinkedInIcon>
+      </IconButton>
+      <IconButton
+        style={{ backgroundColor: 'transparent' }}
+        sx={{ color: 'black' }}
+        onClick={() =>
+          window.open('https://github.com/focused-labs/knowledge-base-demo', '_blank')
+        }>
+        <GitHubIcon></GitHubIcon>
+      </IconButton>
+    </Toolbar>
+  </AppBar>
+);
