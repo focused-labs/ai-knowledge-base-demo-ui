@@ -64,6 +64,7 @@ export const QueryForm: React.FC<{
         }
       }}>
       <TextField
+        size="small"
         fullWidth
         value={inputQuery}
         placeholder="Ask Something"

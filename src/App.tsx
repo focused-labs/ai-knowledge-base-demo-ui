@@ -142,10 +142,7 @@ const App = () => {
         <Grid item xs={12} sm={10}>
           <Card
             sx={{
-              height: {
-                xs: '87vh',
-                sm: '80vh'
-              },
+              height: '90vh',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
