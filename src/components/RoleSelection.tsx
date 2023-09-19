@@ -20,7 +20,7 @@ export const RoleSelection: React.FC<{
     }}>
     <Grid>
       <Typography>
-        Hi, I’m KH, Focused Labs’ AI assistant. I’m here to help you learn all about Focused Labs.
+        Hello! Welcome to the AI Knowledge Base. Here you can learn all about Focused Labs.
       </Typography>
       <Grid container direction="row" marginTop="1.5rem">
         <Typography>Before we start, what is</Typography>

@@ -5,7 +5,6 @@ import { QueryForm } from './components/QueryForm';
 import { sendDeleteSession, sendQuery } from './services/ApiService';
 import { SubHeader } from './components/SubHeader';
 import { Conversation } from './components/Conversation';
-import infoVideo from './images/info-video.gif';
 import { commonColors } from './styles/styles';
 import { IPersona, personas } from './types/Personas';
 import { IChat } from './types/IChat';
@@ -13,6 +12,8 @@ import { RoleSelection } from './components/RoleSelection';
 import { IdeasForYou } from './components/IdeasForYou';
 import { ClearChatButton } from './components/ClearChatButton';
 import { Header } from './components/Header';
+// @ts-ignore
+import infoVideo from './images/kb-overview.mp4';
 
 const App = () => {
   const [persona, setPersona] = useState<IPersona>(personas.ANY_ROLE);
@@ -126,12 +127,14 @@ const App = () => {
             <CloseIcon />
           </Fab>
           <CardMedia
-            component="img"
-            image={infoVideo}
+            component="video"
+            src={infoVideo}
+            controls
+            autoPlay
+            muted
             height="100%"
-            alt="loading..."
-            sx={{ objectFit: 'contain', border: 'none' }}
-          />
+            onEnded={() => handleInfoClose()}
+            sx={{ objectFit: 'contain', border: 'none' }}></CardMedia>
         </Card>
       </Modal>
       <Header />
@@ -142,14 +145,13 @@ const App = () => {
           borderTopLeftRadius: '2rem',
           borderTopRightRadius: '2rem',
           backgroundColor: commonColors.backgroundBlue,
-          height: '100vh'
+          height: '93vh'
         }}>
         <SubHeader />
         <Grid item xs={0} sm={1}></Grid>
         <Grid item xs={12} sm={10}>
           <Card
             sx={{
-              height: '90vh',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -169,7 +171,7 @@ const App = () => {
             <Grid
               item
               sx={{
-                minHeight: '62vh',
+                minHeight: '70vh',
                 overflow: 'auto',
                 padding: '1rem',
                 width: 1
@@ -182,7 +184,6 @@ const App = () => {
                 </Grid>
               )}
             </Grid>
-
             <Grid
               container
               item
@@ -190,7 +191,7 @@ const App = () => {
               justifyContent="center"
               alignItems="center"
               xs={12}
-              sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem', height: '13vh' }}>
+              sx={{ boxShadow: '0px -3px 5px 0px #0000001F', padding: '1rem' }}>
               <Grid item xs={10}>
                 <QueryForm
                   inputQuery={inputQuery}
@@ -207,7 +208,12 @@ const App = () => {
                 item
                 xs={12}>
                 <Typography
-                  sx={{ color: commonColors.darkGray, fontSize: '0.75rem', textAlign: 'center' }}>
+                  sx={{
+                    color: commonColors.darkGray,
+                    fontSize: '0.75rem',
+                    textAlign: 'center',
+                    paddingTop: '0.25rem'
+                  }}>
                   This chatbot may produce inaccurate information. Questions and responses are being
                   logged.
                 </Typography>
