@@ -11,6 +11,7 @@ export const Header = () => (
     sx={{
       background: commonColors.white,
       height: '7vh',
+      marginBottom: '.5rem',
       boxShadow: 'none'
     }}>
     <Toolbar>

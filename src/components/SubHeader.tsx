@@ -9,7 +9,7 @@ export const SubHeader = () => (
     direction="row"
     justifyContent="center"
     alignItems="center"
-    sx={{ padding: '.1rem' }}>
+    sx={{ padding: '.5rem' }}>
     <Grid item>
       <SparkleIcon style={{ fontSize: '1.5rem', marginRight: '.5rem' }}></SparkleIcon>
     </Grid>

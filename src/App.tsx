@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardMedia, Fab, Grid, Link, Modal, Typography } from '@mui/material';
+import { Card, CardMedia, Fab, Grid, Modal, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { QueryForm } from './components/QueryForm';
 import { sendDeleteSession, sendQuery } from './services/ApiService';
@@ -171,7 +171,7 @@ const App = () => {
             <Grid
               item
               sx={{
-                minHeight: '70vh',
+                height: '66vh',
                 overflow: 'auto',
                 padding: '1rem',
                 width: 1
@@ -217,17 +217,6 @@ const App = () => {
                   This chatbot may produce inaccurate information. Questions and responses are being
                   logged.
                 </Typography>
-                <Link
-                  sx={{
-                    paddingTop: '0.25rem',
-                    color: commonColors.purple400,
-                    fontSize: '0.75rem',
-                    textAlign: 'center'
-                  }}
-                  target="_blank"
-                  href="https://github.com/focused-labs/knowledge-base-demo">
-                  View this project on GitHub
-                </Link>
               </Grid>
             </Grid>
           </Card>
