@@ -17,7 +17,7 @@ export const Header = () => (
       <Box
         display="flex"
         flexGrow={1}
-        onClick={() => window.open('https://focusedlabs.io/', '_blank')}>
+        onClick={() => window.open('https://focusedlabs.io/ai', '_blank')}>
         <IconButton style={{ backgroundColor: 'transparent' }}>
           <FocusedLabsLogo></FocusedLabsLogo>
         </IconButton>
