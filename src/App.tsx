@@ -159,27 +159,25 @@ const App = () => {
               borderRadius: '0.7rem'
             }}>
             {conversation.length !== 0 && (
-              <>
-                <Grid
-                  container
-                  item
+              <Grid
+                container
+                item
+                sx={{
+                  backgroundColor: `${commonColors.white}`,
+                  borderBottom: `1px solid ${commonColors.lightGray}`
+                }}
+                alignItems="center"
+                justifyContent="center"
+                padding="0.25rem">
+                <SvgIcon
+                  viewBox="0 0 26 20"
                   sx={{
-                    backgroundColor: `${commonColors.white}`,
-                    borderBottom: `1px solid ${commonColors.lightGray}`
-                  }}
-                  alignItems="center"
-                  justifyContent="center"
-                  padding="0.25rem">
-                  <SvgIcon
-                    viewBox="0 0 26 20"
-                    sx={{
-                      mr: '0.5rem'
-                    }}>
-                    <RoleIcon />
-                  </SvgIcon>
-                  <Typography>{persona.label}</Typography>
-                </Grid>
-              </>
+                    mr: '0.5rem'
+                  }}>
+                  <RoleIcon />
+                </SvgIcon>
+                <Typography>{persona.label}</Typography>
+              </Grid>
             )}
             <Grid
               item
